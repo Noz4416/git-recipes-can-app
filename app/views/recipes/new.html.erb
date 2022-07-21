@@ -1,2 +1,36 @@
-<h1>Recipes#new</h1>
-<p>Find me in app/views/recipes/new.html.erb</p>
+<h1>レシピ登録</h1>
+
+<%= form_with model:@recipe do |f| %>
+  <div>
+    <%= f.label :"料理名" %>
+    <%= f.text_field :cuisine_name %>
+  </div>
+  <div>
+    <%= f.label :"出来上がり量" %>
+    <%= f.text_field :quantity, value:"人分" %>
+  </div>
+
+  <!--材料入力フォーム・部分テンプ-->
+  <div>材料</div>
+  <section class ="foodstuff">
+    <%= f.fields_for :foodstuffs do |foodsuff| %>
+      <%= render "foodstuff_fields", f: foodstuff %>
+    <% end %>
+    <%= link_to_add_fields "材料の追加", f, :foodstuffs %>
+  </section>
+
+  <!--作り方入力フォーム・部分テンプ-->
+  <div>作り方</div>
+  <section class ="step">
+    <div class ="field">
+      <%= f.fields_for :steps do |step| %>
+        <%= render "step_fields", f: step %>
+      <% end %>
+      <%= link_to_add_fields "作り方の追加", f, :steps %>
+    </div>
+  </section>
+
+  <div>
+    <%= f.label :"メモ" %><br>
+    <%= f.text_area :memo %>
+  </div>

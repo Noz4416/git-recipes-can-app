@@ -1,0 +1,10 @@
+<div class ="nested-fields">
+  <%= f.hidden_field :_destroy %>
+  <div class ="foodstuff_input">
+    <%= f.text_field :name, placeholder:"材料", class:"foodstuff_name" %>
+    <%= f.text_field :amount, placeholder:"分量", class:"foodstuff_amount" %>
+    <%= link_to '#', class:"remove-field-btn" do %>
+      <%= image_tag 'delete', class "js-remove-fields" %>
+    <% end %>
+  </div>
+</div>

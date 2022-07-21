@@ -1,4 +1,4 @@
-<h2>Sign up</h2>
+<h2>新規登録</h2>
 
 <%= form_with model:@user, url:user_registration_path do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
@@ -31,4 +31,9 @@
   </div>
 <% end %>
 
-
+<div>
+  <h4>会員登録がお済みの方は</h4>
+</div>
+<div>
+  <h5><%= render "devise/shared/links" %>からログインしてください。</h5>
+</div>
