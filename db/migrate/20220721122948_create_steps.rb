@@ -5,7 +5,7 @@ class CreateSteps < ActiveRecord::Migration[6.1]
       t.timestamps
 
       t.string :direction
-
+      t.integer :recipe_id
     end
   end
 end

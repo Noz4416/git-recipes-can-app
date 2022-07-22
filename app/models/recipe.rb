@@ -10,4 +10,6 @@ class Recipe < ApplicationRecord
   has_many :foodstuffs, dependent: :destroy
   has_many :genres, dependent: :destroy
   has_many :steps, dependent: :destroy
+  
+
 end

@@ -13,7 +13,7 @@
   <!--材料入力フォーム・部分テンプ-->
   <div>材料</div>
   <section class ="foodstuff">
-    <%= f.fields_for :foodstuffs do |foodsuff| %>
+    <%= f.fields_for :foodstuffs do |foodstuff| %>
       <%= render "foodstuff_fields", f: foodstuff %>
     <% end %>
     <%= link_to_add_fields "材料の追加", f, :foodstuffs %>
@@ -34,3 +34,8 @@
     <%= f.label :"メモ" %><br>
     <%= f.text_area :memo %>
   </div>
+
+  <div>
+    <%= f.submit "登録する" %>
+  </div>
+<% end %>

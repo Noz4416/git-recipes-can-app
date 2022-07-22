@@ -5,8 +5,9 @@ class CreateFoodstuffs < ActiveRecord::Migration[6.1]
       t.timestamps
 
       t.string :name
-      t.integer :units_id
-      t.integer :nutritions_id
+      t.integer :unit_id
+      t.integer :nutrition_id
+      t.string :amount
 
     end
   end
