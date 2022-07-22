@@ -4,12 +4,12 @@ class CreateRecipes < ActiveRecord::Migration[6.1]
 
       t.timestamps
 
-      t.integer :users_id
-      t.integer :foodstuffs_id
-      t.integer :genres_id
+      t.integer :user_id
+      t.integer :foodstuff_id
+      t.integer :genre_id
       t.string :cuisine_name
       t.string :quantity
-      t.string :cook_process
+      t.integer :step_id
       t.string :memo
 
     end

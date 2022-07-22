@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   resources :nutritions, only:[:new, :edit]
   resources :units, only:[:new,:edit]
   resources :genres, only:[:new,:show]
-  resources :recipes, only:[:new,:index,:show,:edit]
+  resources :recipes, only:[:new,:index,:show,:edit,:create]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 

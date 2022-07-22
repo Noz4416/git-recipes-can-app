@@ -4,7 +4,7 @@ class CreateNutritions < ActiveRecord::Migration[6.1]
 
       t.timestamps
 
-      t.integer :foodstuffs_id
+      t.integer :foodstuff_id
       t.string :calorie
       t.string :protein
       t.string :lipid
