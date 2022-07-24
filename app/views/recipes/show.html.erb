@@ -1,2 +1,18 @@
-<h1>Recipes#show</h1>
-<p>Find me in app/views/recipes/show.html.erb</p>
+<div class ="detail">
+  <!--ユーザーのみ編集ボタン-->
+  <% if user_signed_in? && @recipe.user == current_user %>
+    <%= link_to "編集する", edit_recipe_path, class:"btn recipe-edit-btn" %>
+  <% end %>
+
+  <div>
+    <p>料理名：<%= @recipe.cuisine_name %></p>
+    <p>出来上がり量：<%= @recipe.quantity %></p>
+    <% @recipe.foodstuffs.each do |foodstuff| %>
+      <p>材料：<%= foodstuff.name %><%= foodstuff.amount %></p>
+    <% end %>
+    <% @recipe.steps.each do |step| %>
+      <p>作り方：<%= step.direction %></p>
+    <% end %>
+    <p>メモ：<%= @recipe.memo %></p>
+  </div>
+</div>

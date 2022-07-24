@@ -1,10 +1,12 @@
-<div class ="nested-fields">
+<!--材料のフォーム-->
+<div class ="foodstuff-fields">
   <%= f.hidden_field :_destroy %>
   <div class ="foodstuff_input">
     <%= f.text_field :name, placeholder:"材料", class:"foodstuff_name" %>
     <%= f.text_field :amount, placeholder:"分量", class:"foodstuff_amount" %>
-    <%= link_to '' do %>
-      <i class="fas fa-trash-alt"></i>
+
+    <%= link_to '#', class:"remove-field-btn" do %>
+      <i class ="fas fa-trash-alt js-remove_fields"></i>
     <% end %>
   </div>
 </div>

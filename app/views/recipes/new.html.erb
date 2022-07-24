@@ -1,6 +1,8 @@
+<!--<%= render 'shared/flash' %>-->
+
 <h1>レシピ登録</h1>
 
-<%= form_with model:@recipe do |f| %>
+<%= form_with model:@recipe, url:recipes_path, method: :post do |f| %>
   <div>
     <%= f.label :"料理名" %>
     <%= f.text_field :cuisine_name %>
@@ -36,6 +38,11 @@
   </div>
 
   <div>
+    <%= f.label :"ジャンル" %>
+    <%= f.collection_select :genre_id, @genres, :id, :name, prompt: "選択してください" %>
+  </div>
+  <div>
     <%= f.submit "登録する" %>
   </div>
 <% end %>
+
