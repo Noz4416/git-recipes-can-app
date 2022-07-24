@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  get 'users/mypage' => 'users#sshow'
+  get 'users/mypage' => 'users#show'
   get 'users/unsubscribe' => 'users#unsubscribe'
 
 

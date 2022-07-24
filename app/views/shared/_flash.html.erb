@@ -1,0 +1,13 @@
+<!--レシピ登録時のエラーメッセージ-->
+<% if flash[:notice] %>
+  <p id ='notice'>
+    <%= flash[:notice] %>
+  </p>
+<% else @recipe.errors.any? %>
+  <ul>
+    <% @recipe.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+

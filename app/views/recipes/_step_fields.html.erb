@@ -1,10 +1,11 @@
-<div class ="nested-fields">
+<!--作り方のフォーム-->
+<div class ="step-fields">
   <%= f.hidden_field :_destroy %>
-  <div class ="step_input">
-    <p class ="step_number"></p>
+  <p class ="step_number"></p>
     <%= f.text_area :direction, class:"step_input" %>
-    <%= link_to '' do %>
-      <i class="fas fa-trash-alt"></i>
+
+    <%= link_to '#', class:"remove-field-btn" do %>
+      <i class ="fas fa-trash-alt js-remove_fields"></i>
     <% end %>
-  </div>
 </div>
+
