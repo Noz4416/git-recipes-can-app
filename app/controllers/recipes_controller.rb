@@ -53,6 +53,8 @@ class RecipesController < ApplicationController
       :quantity,
       :step_id,
       :memo,
+      :image,
+      :movie,
       foodstuffs_attributes:[:id,:name,:amount,:_destroy],
       steps_attributes:[:id,:direction,:_destroy]
     )
