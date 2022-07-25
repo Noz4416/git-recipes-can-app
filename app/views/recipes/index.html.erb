@@ -1,0 +1,12 @@
+<h1>リスト一覧</h1>
+
+<section class ="list">
+
+  <div class =list_container>
+    <%= @recipes.each do |recipe| %>
+    <div class ="list_title">
+      <%= link_to recipe.cusine_name, recipe_path(recipe.id)%>
+    </div>
+    <% end %>
+  </div>
+</section>

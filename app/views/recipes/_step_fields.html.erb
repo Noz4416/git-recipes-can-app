@@ -1,0 +1,13 @@
+<!--作り方のフォーム-->
+<div class ="nested-fields">
+  <%= f.hidden_field :_destroy %>
+  <div class ="step_input">
+    <p class ="step_number"></p>
+      <%= f.text_area :direction %>
+
+      <%= link_to '#', class:"remove-field-btn" do %>
+        <%= image_tag 'delete', class:"remove_fields" %>
+      <% end %>
+  </div>
+</div>
+

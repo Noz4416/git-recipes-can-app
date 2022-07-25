@@ -1,0 +1,25 @@
+<div class ="detail">
+  <!--ユーザーのみ編集ボタン-->
+  <% if user_signed_in? && @recipe.user == current_user %>
+    <%= link_to "編集する", edit_recipe_path, class:"btn recipe-edit-btn" %>
+  <% end %>
+
+  <div>
+    <!--画像か動画が添付されている時-->
+    <% if @user.image.attached? %>
+      <p><%= image_tag @user.image, size:'400x300' %></p>
+    <% else @user.movie.attached? %>
+      <video src = "<%= rails_blob_path(@user.movie), size:'400x300' %>" type = "video/mp4" controls></video>
+    <% end %>
+
+    <p>料理名：<%= @recipe.cuisine_name %></p>
+    <p>出来上がり量：<%= @recipe.quantity %></p>
+    <% @recipe.foodstuffs.each do |foodstuff| %>
+      <p>材料：<%= foodstuff.name %><%= foodstuff.amount %></p>
+    <% end %>
+    <% @recipe.steps.each do |step| %>
+      <p>作り方：<%= step.direction %></p>
+    <% end %>
+    <p>メモ：<%= @recipe.memo %></p>
+  </div>
+</div>

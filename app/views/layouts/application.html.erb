@@ -2,15 +2,36 @@
 <html>
   <head>
     <title>RecipesCanApp</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel ="stylsheet" href ="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   </head>
 
   <body>
+    <header>
+      <% if user_signed_in? %>
+      <li>
+        <%= link_to 'レシピ登録', new_recipe_path %>
+      </li>
+      <li>
+        <%= link_to "ログアウト", destroy_user_session_path, {method: :delete} %>
+      </li>
+      <li>
+        <%= render "shared/header" %>
+      </li>
+    <% else %>
+      <li>
+        <%= link_to "新規登録", new_user_registration_path %>
+      </li>
+      <li>
+        <%= link_to "ログイン", new_user_session_path %>
+      </li>
+    <% end %>
+    </header>
     <%= yield %>
   </body>
 </html>

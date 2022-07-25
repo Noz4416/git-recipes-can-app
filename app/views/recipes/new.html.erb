@@ -1,0 +1,52 @@
+<%= render 'shared/flash' %>
+
+<h1>レシピ登録</h1>
+
+<%= form_with model:@recipe, url:recipes_path, method: :post do |f| %>
+  <div>
+    <%= f.label :"料理名" %>
+    <%= f.text_field :cuisine_name %>
+  </div>
+  <div>
+    <%= f.label :"出来上がり量" %>
+    <%= f.text_field :quantity, value:"人分" %>
+  </div>
+
+  <!--材料入力フォーム・部分テンプ-->
+  <div>材料</div>
+  <section class ="foodstuff">
+    <%= f.fields_for :foodstuffs do |foodstuff| %>
+      <%= render "foodstuff_fields", f: foodstuff %>
+    <% end %>
+    <%= link_to_add_fields "材料の追加", f, :foodstuffs %>
+  </section>
+
+  <!--作り方入力フォーム・部分テンプ-->
+  <div>作り方</div>
+  <section class ="step">
+    <div class ="field">
+      <%= f.fields_for :steps do |step| %>
+        <%= render "step_fields", f: step %>
+      <% end %>
+      <%= link_to_add_fields "作り方の追加", f, :steps %>
+    </div>
+  </section>
+
+  <div>
+    <%= f.label :"メモ" %>
+    <%= f.label :image, :movie, class:"fas-regular fa-camera" do %>
+      <%= f.file_field :image, style: 'display:none;' %>
+      <%= f.file_field :movie, style: 'display:none;' %>
+    <% end %><br>
+    <%= f.text_area :memo %>
+  </div>
+
+  <div>
+    <%= f.label :"ジャンル" %>
+    <%= f.collection_select :genre_id, @genres, :id, :name, prompt: "選択してください" %>
+  </div>
+  <div>
+    <%= f.submit "登録する" %>
+  </div>
+<% end %>
+

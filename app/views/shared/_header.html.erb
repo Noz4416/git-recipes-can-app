@@ -1,0 +1,6 @@
+<%= search_form_for @q, url: recipes_search_path do |f| %>
+  <%= f.search_field :cuisine_name_or_foodstuffs_name_cont, placeholder: 'レシピ名・食材名で探す', class:'input-box' %>
+  <%= f.button type: "submit", class:"search-btn" do %>
+    <%= image_tag "", class:"search-icon" %>
+  <% end %>
+<% end %>
