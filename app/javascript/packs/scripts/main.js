@@ -1,27 +1,7 @@
 
-// // import { ScrollObserver } from './libs/scroll'
-
-window.addEventListener('turbolinks:load', function () {
-// 	new Main();
-// 	new MobileMenu();
-	new addFields();
-	new removeFields();
-
-	if (document.URL.match("recipes/new") ||
-		document.URL.match("recipes/[0-9]+/edit") ||
-		document.URL.match("users/edit") ||
-		document.URL.match("^/users$") ||
-		document.URL.match("inventories/[0-9]+/edit") ||
-		document.URL.match("inventories/new")
-	) {
-		// new imgPreView();
-	}
-});
-
-
 class addFields {
   constructor(){
-    this.links = document.querySelectorAll('.js-add_fields');
+    this.links = document.querySelectorAll('.add_fields');
     this.iterateLinks();
   }
 
@@ -45,17 +25,20 @@ class addFields {
   }
 }
 
+window.addEventListener('turbolinks:load',() => new addFields());
+
+
 class removeFields {
-  constructor() {
+  constructor(){
     this.iterateLinks();
   }
 
   iterateLinks() {
-    document.addEventListener('click', e => {
-      if (e.target && e.target.className == 'js-remove_fields') {
-        this.handleClick(e.target, e);
-      }
-    });
+		document.addEventListener('click', e => {
+			if (e.target && e.target.className == 'remove_fields') {
+				this.handleClick(e.target, e);
+			}
+		});
   }
 
   handleClick(link, e) {
@@ -71,4 +54,6 @@ class removeFields {
     }
   }
 }
+
+window.addEventListener('turbolinks:load',() => new removeFields());
 

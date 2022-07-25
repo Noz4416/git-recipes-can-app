@@ -5,6 +5,13 @@
   <% end %>
 
   <div>
+    <!--画像か動画が添付されている時-->
+    <% if @user.image.attached? %>
+      <p><%= image_tag @user.image, size:'400x300' %></p>
+    <% else @user.movie.attached? %>
+      <video src = "<%= rails_blob_path(@user.movie), size:'400x300' %>" type = "video/mp4" controls></video>
+    <% end %>
+
     <p>料理名：<%= @recipe.cuisine_name %></p>
     <p>出来上がり量：<%= @recipe.quantity %></p>
     <% @recipe.foodstuffs.each do |foodstuff| %>

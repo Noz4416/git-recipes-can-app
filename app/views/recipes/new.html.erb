@@ -1,4 +1,4 @@
-<!--<%= render 'shared/flash' %>-->
+<%= render 'shared/flash' %>
 
 <h1>レシピ登録</h1>
 
@@ -33,7 +33,11 @@
   </section>
 
   <div>
-    <%= f.label :"メモ" %><br>
+    <%= f.label :"メモ" %>
+    <%= f.label :image, :movie, class:"fas-regular fa-camera" do %>
+      <%= f.file_field :image, style: 'display:none;' %>
+      <%= f.file_field :movie, style: 'display:none;' %>
+    <% end %><br>
     <%= f.text_area :memo %>
   </div>
 
