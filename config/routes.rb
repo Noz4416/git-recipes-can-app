@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   get 'users/mypage' => 'users#show'
   get 'users/unsubscribe' => 'users#unsubscribe'
-
+  get 'recipes/search' => 'recipes#search'
 
 
   resources :foodstuffs, only:[:new, :edit]

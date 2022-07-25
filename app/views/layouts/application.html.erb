@@ -20,6 +20,9 @@
       <li>
         <%= link_to "ログアウト", destroy_user_session_path, {method: :delete} %>
       </li>
+      <li>
+        <%= render "shared/header" %>
+      </li>
     <% else %>
       <li>
         <%= link_to "新規登録", new_user_registration_path %>

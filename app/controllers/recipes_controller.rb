@@ -2,7 +2,6 @@ class RecipesController < ApplicationController
 
   before_action :authenticate_user!, only: [:new,:edit,:create,:update,:destroy]
   before_action :set_recipe, only: [:show,:eit,:update,:destroy]
-  # before_action :set_q, only: [:index,:search]
 
 
   def new
@@ -29,6 +28,10 @@ class RecipesController < ApplicationController
   def show
   end
 
+  def search
+    @results = @q.result
+  end
+
   def edit
     @genres = Genre.all
 
@@ -39,10 +42,6 @@ class RecipesController < ApplicationController
   def set_recipe
     @recipe = Recipe.find(params[:id])
   end
-
-  # def set_q
-  #   @q = Recipe.ransack(params[:q])
-  # end
 
   def recipe_params
     params.require(:recipe).permit(
