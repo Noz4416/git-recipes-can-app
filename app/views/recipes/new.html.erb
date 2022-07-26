@@ -34,7 +34,8 @@
 
   <div>
     <%= f.label :"メモ" %>
-    <%= f.label :image, :movie, class:"fas-regular fa-camera" do %>
+    <%= f.label :image, :movie do %>
+      <i class="fas fa-camera"></i>
       <%= f.file_field :image, style: 'display:none;' %>
       <%= f.file_field :movie, style: 'display:none;' %>
     <% end %><br>
