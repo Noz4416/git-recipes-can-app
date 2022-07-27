@@ -1,5 +1,20 @@
-<h1>Search Result</h1>
+<h1>Search Index</h1>
 
 <div>
-
+  <% if @search.present? %>
+    「<%= @search %>」の検索結果
+  <% elsif @genre_name.present? %>
+    「<%= @genre_name %>」の検索結果
+  <% else %>
+    検索結果
+  <% end %>
 </div>
+
+  <%= render 'shared/recipe_list' %>
+  <%= render 'shared/recipe_genre' %>
+
+  <%= paginate @recipes %>
+
+  <div class ="cancel">
+    <%= link_to 'レシピ一覧に戻る', recipes_path %>
+  </div>

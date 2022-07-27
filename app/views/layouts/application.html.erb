@@ -8,7 +8,7 @@
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <link rel ="stylsheet" href ="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
   </head>
 
   <body>
@@ -21,7 +21,7 @@
         <%= link_to "ログアウト", destroy_user_session_path, {method: :delete} %>
       </li>
       <li>
-        <%= render "shared/header" %>
+        <%= render "shared/search" %>
       </li>
     <% else %>
       <li>

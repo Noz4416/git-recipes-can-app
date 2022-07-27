@@ -29,7 +29,12 @@ class RecipesController < ApplicationController
   end
 
   def search
-    @results = @q.result
+    @search = params[:q][:cuisine_name_or_foodstuffs_name_cont]
+    @recipes = @q.result(distinct: true).page(params[:page]).per(6)
+  end
+
+  def genre_search
+    @recipes = @d.result(distinct: true).page(params[:page]).per(6)
   end
 
   def edit
@@ -47,13 +52,13 @@ class RecipesController < ApplicationController
     params.require(:recipe).permit(
       :user_id,
       :foodstuff_id,
-      :genre_id,
       :cuisine_name,
       :quantity,
       :step_id,
       :memo,
       :image,
       :movie,
+      genre_ids: [],
       foodstuffs_attributes:[:id,:name,:amount,:_destroy],
       steps_attributes:[:id,:direction,:_destroy]
     )

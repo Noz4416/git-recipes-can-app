@@ -1,3 +1,5 @@
+<h1>レシピ詳細</h1>
+
 <div class ="detail">
   <!--ユーザーのみ編集ボタン-->
   <% if user_signed_in? && @recipe.user == current_user %>
@@ -21,5 +23,6 @@
       <p>作り方：<%= step.direction %></p>
     <% end %>
     <p>メモ：<%= @recipe.memo %></p>
+    <p>ジャンル：<%= @recipe.genre.name %></p>
   </div>
 </div>
