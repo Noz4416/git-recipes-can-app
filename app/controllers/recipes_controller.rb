@@ -30,6 +30,11 @@ class RecipesController < ApplicationController
 
   def search
     @search = params[:q][:cuisine_name_or_foodstuffs_name_cont]
+    @recipes = @q.result(distinct: true).page(params[:page]).per(6)
+  end
+
+  def genre_search
+    @recipes = @d.result(distinct: true).page(params[:page]).per(6)
   end
 
   def edit

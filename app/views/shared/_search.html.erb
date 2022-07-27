@@ -1,6 +1,14 @@
 <%= search_form_for @q, url: recipes_search_path do |f| %>
   <%= f.search_field :cuisine_name_or_foodstuffs_name_cont, placeholder: 'レシピ名・食材名で探す', class:'input-box' %>
   <%= f.button type: "submit", class:"search-btn" do %>
-    <%= image_tag "", class:"search-icon" %>
+    <i class="fas fa-search"></i>
+  <% end %>
+<% end %>
+
+
+<%= search_form_for @d, url: recipes_search_path do |f| %>
+  <%= f.collection_select :name_eq, @genre_name, :id, :name, class:'genre-select'  %>
+  <%= f.button type: "submit", class:"search-btn" do %>
+    <i class="fas fa-search"></i>
   <% end %>
 <% end %>
