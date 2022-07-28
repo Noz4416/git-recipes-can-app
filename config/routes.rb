@@ -23,8 +23,13 @@ Rails.application.routes.draw do
   resources :units, only:[:new,:edit]
   resources :genres, only:[:new,:show]
   resources :recipes, only:[:new,:index,:show,:edit,:create]
+  resources :recipes do
+    collection do
+      get :bookmarks
+    end
+  end
+  resources :bookmarks, only:[:create,:destroy]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-
 
 end
