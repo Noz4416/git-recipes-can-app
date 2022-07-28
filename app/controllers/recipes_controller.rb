@@ -29,20 +29,22 @@ class RecipesController < ApplicationController
   end
 
   def search
-    @search = params[:q][:cuisine_name_or_foodstuffs_name_cont]
+    @q = Recipe.ransack(params[:q])
     @recipes = @q.result(distinct: true).page(params[:page]).per(6)
+    @search = params[:q][:cuisine_name_or_foodstuffs_name_cont]
+# 取得したgenre_id_eqをnameに変換
+    @search_genre = Genre.find(params[:q][:genre_id_eq]).name
   end
 
-  def genre_search
-    @recipes = @d.result(distinct: true).page(params[:page]).per(6)
-  end
 
   def edit
     @genres = Genre.all
 
   end
 
+
   private
+
 
   def set_recipe
     @recipe = Recipe.find(params[:id])

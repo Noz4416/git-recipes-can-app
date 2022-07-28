@@ -2,7 +2,6 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_q
-  before_action :set_genre
 
 
   def after_sign_in_path_for(resource)
@@ -22,11 +21,8 @@ class ApplicationController < ActionController::Base
 
   def set_q
     @q = Recipe.ransack(params[:q])
+    @genres = Genre.all
   end
 
-  def set_genre
-    @d = Genre.ransack(params[:q])
-    @genre_name = Genre.select("name").distinct
-  end
 
 end
