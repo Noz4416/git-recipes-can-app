@@ -22,12 +22,8 @@ class ApplicationController < ActionController::Base
 
   def set_q
     @q = Recipe.ransack(params[:q])
-    @recipes = @q.result(distinct: true).page(params[:page]).per(6)
+    @genres = Genre.all
   end
 
-  def genre_search
-    @genre = Genre.find(params[:genre_id])
-    @recipes = @genre.recipes.includes([:user])
-  end
 
 end

@@ -52,3 +52,10 @@ $(function() {
 
 }).call(this);
 
+
+<%= form_tag({action: 'search', method: "get"}) do %>
+  <%= text_field_tag :search %>
+  <%= f.button type: "submit", class:"search-btn" do %>
+    <i class="fas fa-search"></i>
+  <% end %>
+<% end %>
