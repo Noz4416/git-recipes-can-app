@@ -8,7 +8,9 @@ class Recipe < ApplicationRecord
   validates :cook_process, presence: true
 
   belongs_to :user
+
   has_many :bookmarks, dependent: :destroy
+
 # ネストしたフォームへ
   has_many :foodstuffs, dependent: :destroy
   accepts_nested_attributes_for :foodstuffs, allow_destroy: true, reject_if: :all_blank
@@ -22,6 +24,7 @@ class Recipe < ApplicationRecord
   def bookmarked_by?(user)
     bookmarks.where(user_id: user).exists?
   end
+
 
 
 
