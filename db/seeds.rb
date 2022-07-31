@@ -11,14 +11,14 @@
 # csvをinportする記述。foreachは大容量のcsvに使う
 require 'csv'
 
-CSV.foreach('db/nutrition.csv') do |row|
+CSV.foreach('db/nutrition.csv', headers: true) do |row|
   Nutrition.create(
-    name: row['name'],
-    calorie: row['calorie'],
-    protein: row['protein'],
-    lipid: row['lipid'],
-    carbohydrate: row['carbohydrate'],
-    salt: row['salt']
+    name: row[0],
+    calorie: row[1],
+    protein: row[2],
+    lipid: row[3],
+    carbohydrate: row[4],
+    salt: row[5]
   )
 end
 
