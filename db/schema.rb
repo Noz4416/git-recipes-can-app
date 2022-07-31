@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_29_140430) do
+ActiveRecord::Schema.define(version: 2022_07_31_041635) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -53,11 +53,12 @@ ActiveRecord::Schema.define(version: 2022_07_29_140430) do
   create_table "foodstuffs", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "name"
     t.integer "unit_id"
-    t.integer "nutrition_id"
     t.string "amount"
-    t.integer "recipe_id"
+    t.integer "recipe_id", null: false
+    t.integer "nutrition_id", null: false
+    t.index ["nutrition_id"], name: "index_foodstuffs_on_nutrition_id"
+    t.index ["recipe_id"], name: "index_foodstuffs_on_recipe_id"
   end
 
   create_table "genres", force: :cascade do |t|
@@ -134,6 +135,8 @@ ActiveRecord::Schema.define(version: 2022_07_29_140430) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookmarks", "recipes"
   add_foreign_key "bookmarks", "users"
+  add_foreign_key "foodstuffs", "nutritions"
+  add_foreign_key "foodstuffs", "recipes"
   add_foreign_key "recipe_genres", "genres"
   add_foreign_key "recipe_genres", "recipes"
 end

@@ -17,7 +17,9 @@ class Recipe < ApplicationRecord
 # タグ付け中間テーブル
   has_many :recipe_genres, dependent: :destroy
   has_many :genres, through: :recipe_genres, dependent: :destroy
-
+  accepts_nested_attributes_for :recipe_genres
+  has_many :nutritions, through: :foodstuffs, dependent: :destroy
+  accepts_nested_attributes_for :foodstuffs
 
   def bookmarked_by?(user)
     bookmarks.where(user_id: user).exists?
