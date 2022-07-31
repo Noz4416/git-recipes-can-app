@@ -8,9 +8,25 @@
 
 # coding: utf-8
 
+# csvをinportする記述。foreachは大容量のcsvに使う
+require 'csv'
+
+CSV.foreach('db/nutrition.csv') do |row|
+  Nutrition.create(
+    name: row['name'],
+    calorie: row['calorie'],
+    protein: row['protein'],
+    lipid: row['lipid'],
+    carbohydrate: row['carbohydrate'],
+    salt: row['salt']
+  )
+end
+
+
 Genre.create([
   { name: '和食'},
   { name: '洋食'},
   { name: '中華'},
   { name: '時短'},
+  { name: 'その他'}
   ])
