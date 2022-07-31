@@ -17,7 +17,7 @@
     <p>料理名：<%= @recipe.cuisine_name %></p>
     <p>出来上がり量：<%= @recipe.quantity %></p>
     <% @recipe.foodstuffs.each do |foodstuff| %>
-      <p>材料：<%= foodstuff.name %><%= foodstuff.amount %></p>
+      <p>材料：<%= foodstuff.nutrition.name %><%= foodstuff.amount %></p>
     <% end %>
     <% @recipe.steps.each do |step| %>
       <p>作り方：<%= step.direction %></p>

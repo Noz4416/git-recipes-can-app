@@ -1,6 +1,6 @@
 class Foodstuff < ApplicationRecord
 
   belongs_to :recipe
-  has_many :nutritions
+  belongs_to :nutrition
   has_many :units
 end

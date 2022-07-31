@@ -26,12 +26,13 @@ class RecipesController < ApplicationController
   end
 
   def show
+    @recipe = Recipe.find(params[:id])
   end
 
   def search
     @q = Recipe.ransack(params[:q])
     @recipes = @q.result(distinct: true).page(params[:page]).per(6)
-    @search = params[:q][:cuisine_name_or_foodstuffs_name_cont]
+    @search = params[:q][:cuisine_name_or_nutritions_name_cont]
 # 取得したgenre_id_eqをnameに変換
     @search_genre = Genre.find(params[:q][:genre_id_eq]).name
   end
@@ -54,6 +55,7 @@ class RecipesController < ApplicationController
     params.require(:recipe).permit(
       :user_id,
       :foodstuff_id,
+      :nutrition_id,
       :cuisine_name,
       :quantity,
       :step_id,
@@ -61,7 +63,8 @@ class RecipesController < ApplicationController
       :image,
       :movie,
       genre_ids: [],
-      foodstuffs_attributes:[:id,:name,:amount,:_destroy],
+      nutritions_attributes:[:id,:name],
+      foodstuffs_attributes:[:id,:amount,:_destroy],
       steps_attributes:[:id,:direction,:_destroy]
     )
   end
