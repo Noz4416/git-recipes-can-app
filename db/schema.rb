@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 2022_07_29_140430) do
+
+
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -132,8 +135,10 @@ ActiveRecord::Schema.define(version: 2022_07_29_140430) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+
   add_foreign_key "bookmarks", "recipes"
   add_foreign_key "bookmarks", "users"
+
   add_foreign_key "recipe_genres", "genres"
   add_foreign_key "recipe_genres", "recipes"
 end
