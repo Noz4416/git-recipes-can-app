@@ -1,2 +1,30 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class ="container my-5">
+  <div class ="row offset-sm-1">
+    <h1><%= @nickname %></h1>
+  </div>
+  <div class ="row mt-5">
+    <h4 class ="font-weight-bold ml-4 mr-5">登録情報</h4>
+    <%= link_to "編集する", edit_user_path(@user), class:"btn btn-success text-white ml-5" %>
+  </div>
+
+  <table class ="table table-bordered col-sm-8">
+    <tr>
+      <td class ="col-sm-2">氏名</td>
+      <td class ="col-sm-6">
+        <%= @user.nickname %>
+      </td>
+    </tr>
+    <tr>
+      <td>メールアドレス</td>
+    　<td><%= @user.email %></td>
+    </tr>
+    <tr>
+      <td>登録レシピ</td>
+      <td><%= @user.recipes.count %>件</td>
+    </tr>
+    <tr>
+      <td>公開ステータス</td>
+      <td><%= @user.active_status %></td>
+    </tr>
+  </table>
+</div>

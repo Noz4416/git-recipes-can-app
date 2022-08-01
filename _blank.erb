@@ -62,3 +62,21 @@ $(function() {
 
     add_reference :foodstuffs, :recipe, null: false, foreign_key: true
     add_reference :foodstuffs, :nutrition, null: false, foreign_key: true
+
+     <% elsif @recipe.movie.attached? %>
+      <video src = "<%= rails_blob_path(@recipe.movie), size:'400x300' %>" type = "video/mp4" controls></video>
+
+<!--栄養素の計算表示-->
+  <div class ="nutrition-field">
+    <p>カロリー：<%= @recipe.calculate(:calolie) %></p>
+    <p>たんぱく質：<%= @recipe.calculate(:protein) %></p>
+    <p>脂質：<%= @recipe.calculate(:lipid) %></p>
+    <p>炭水化物：<%= @recipe.calculate(:carbohydrate) %></p>
+    <p>塩分：<%= @recipe.calculate(:salt) %></p>
+  </div>
+</div>
+
+
+
+  # exceptでindex以外のページに適応させる
+  before_action :set_user, except: [:index]

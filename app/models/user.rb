@@ -37,4 +37,13 @@ class User < ApplicationRecord
     bookmark_recipes.destroy(recipe)
   end
 
+  # 公開ステータス
+  def public_status
+    if  status == false
+      "非公開"
+    else
+      "公開"
+    end
+  end
+
 end

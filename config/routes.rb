@@ -16,14 +16,12 @@ Rails.application.routes.draw do
   get 'users/mypage' => 'users#show'
   get 'users/unsubscribe' => 'users#unsubscribe'
   get 'recipes/search' => 'recipes#search'
+  patch 'users/withdraw' => 'users#withdraw'
 
 
-  resources :foodstuffs, only:[:new, :edit]
-  resources :nutritions, only:[:new, :edit]
   resources :units, only:[:new,:edit]
-  resources :genres, only:[:new,:show]
-  resources :recipes, only:[:new,:index,:show,:edit,:create]
-  resources :recipes do
+  resources :genres, only:[:index,:create,:destroy]
+  resources :recipes, only:[:new,:index,:show,:edit,:create,:update,:destroy] do
     collection do
       get :bookmarks
     end

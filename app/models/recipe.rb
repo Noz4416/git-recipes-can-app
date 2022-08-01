@@ -5,7 +5,7 @@ class Recipe < ApplicationRecord
 
   validates :cuisine_name, presence: true
   validates :quantity, presence: true
-  validates :cook_process, presence: true
+
 
   belongs_to :user
 
@@ -21,11 +21,18 @@ class Recipe < ApplicationRecord
   has_many :genres, through: :recipe_genres, dependent: :destroy
   accepts_nested_attributes_for :recipe_genres
   has_many :nutritions, through: :foodstuffs, dependent: :destroy
-  accepts_nested_attributes_for :foodstuffs
+
+
 
   def bookmarked_by?(user)
     bookmarks.where(user_id: user).exists?
   end
+
+# 栄養素の計算式
+  def calculate(column)
+    (nutritions.pluck(column).sum / 100) * (foodstuffs.pluck(:amount).sum)
+  end
+
 
 
 

@@ -63,6 +63,6 @@ gem 'ransack'
 
 gem 'httpclient'
 
-# gem 'link_to_add_fields', '~> 0.1.0'
+gem 'google-cloud-vision'
 
-# gem 'google-cloud-vision'
+gem 'dotenv-rails'

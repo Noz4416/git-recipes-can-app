@@ -11,9 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 
-ActiveRecord::Schema.define(version: 2022_07_31_062140) do
-
-
+ActiveRecord::Schema.define(version: 2022_08_01_125301) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -57,9 +55,10 @@ ActiveRecord::Schema.define(version: 2022_07_31_062140) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "unit_id"
-    t.string "amount"
+    t.integer "amount"
     t.integer "recipe_id", null: false
     t.integer "nutrition_id", null: false
+    t.string "name"
     t.index ["nutrition_id"], name: "index_foodstuffs_on_nutrition_id"
     t.index ["recipe_id"], name: "index_foodstuffs_on_recipe_id"
   end
@@ -94,10 +93,8 @@ ActiveRecord::Schema.define(version: 2022_07_31_062140) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
-    t.integer "foodstuff_id"
     t.string "cuisine_name"
     t.string "quantity"
-    t.integer "step_id"
     t.string "memo"
     t.integer "genre_id"
   end
