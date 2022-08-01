@@ -1,4 +1,4 @@
-<h1>レシピ詳細</h1>
+<h1><%= @title %></h1>
 
 <div class ="detail">
   <!--ユーザーのみ編集ボタン-->
@@ -8,21 +8,19 @@
 
   <div>
     <!--画像か動画が添付されている時-->
-    <% if @user.image.attached? %>
-      <p><%= image_tag @user.image, size:'400x300' %></p>
-    <% else @user.movie.attached? %>
-      <video src = "<%= rails_blob_path(@user.movie), size:'400x300' %>" type = "video/mp4" controls></video>
+    <% if @recipe.image.attached? %>
+      <p><%= image_tag @recipe.image, size:'400x300' %></p>
     <% end %>
 
     <p>料理名：<%= @recipe.cuisine_name %></p>
     <p>出来上がり量：<%= @recipe.quantity %></p>
     <% @recipe.foodstuffs.each do |foodstuff| %>
-      <p>材料：<%= foodstuff.nutrition.name %><%= foodstuff.amount %></p>
+      <p>材料：<%= foodstuff.name %><%= foodstuff.amount %></p>
     <% end %>
     <% @recipe.steps.each do |step| %>
       <p>作り方：<%= step.direction %></p>
     <% end %>
     <p>メモ：<%= @recipe.memo %></p>
-    <p>ジャンル：<%= @recipe.genre.name %></p>
+    <p>ジャンル：<%= @recipe.genres.name %></p>
   </div>
-</div>
+
