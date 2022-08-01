@@ -8,7 +8,9 @@ class Recipe < ApplicationRecord
 
 
   belongs_to :user
+
   has_many :bookmarks, dependent: :destroy
+
 # ネストしたフォームへ
   has_many :foodstuffs, dependent: :destroy
   accepts_nested_attributes_for :foodstuffs, allow_destroy: true, reject_if: :all_blank
@@ -30,6 +32,7 @@ class Recipe < ApplicationRecord
   def calculate(column)
     (nutritions.pluck(column).sum / 100) * (foodstuffs.pluck(:amount).sum)
   end
+
 
 
 

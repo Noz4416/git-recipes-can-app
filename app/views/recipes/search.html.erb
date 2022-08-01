@@ -3,15 +3,19 @@
 <div>
   <% if @search.present? %>
     「<%= @search %>」の検索結果
+
   <% elsif @search_genre.present? %>
     「<%= @search_genre %>」の検索結果
+
   <% else %>
     検索結果
   <% end %>
 </div>
 
   <%= render 'shared/recipe_list' %>
+
   <%= render 'shared/recipe_genre' %>
+
 
   <%= paginate @recipes %>
 
