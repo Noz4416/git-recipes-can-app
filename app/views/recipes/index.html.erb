@@ -3,9 +3,9 @@
 <section class ="list">
 
   <div class =list_container>
-    <%= @recipes.each do |recipe| %>
+    <% @recipes.each do |recipe| %>
     <div class ="list_title">
-      <%= link_to recipe.cusine_name, recipe_path(recipe.id)%>
+      <%= link_to recipe.cuisine_name, recipe_path(recipe.id)%>
     </div>
     <% end %>
   </div>

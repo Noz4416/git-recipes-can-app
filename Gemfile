@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.3'
+ruby '3.1.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4'
@@ -63,6 +63,6 @@ gem 'ransack'
 
 gem 'httpclient'
 
-# gem 'link_to_add_fields', '~> 0.1.0'
+gem 'google-cloud-vision'
 
-# gem 'google-cloud-vision'
+gem 'dotenv-rails'
