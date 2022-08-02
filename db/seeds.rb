@@ -11,6 +11,7 @@
 # csvをinportする記述。foreachは大容量のcsvに使う
 require 'csv'
 
+
 CSV.foreach('db/nutrition.csv', headers: true) do |row|
   Nutrition.create(
     name: row[0],
