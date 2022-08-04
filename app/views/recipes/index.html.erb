@@ -1,7 +1,9 @@
+<%= flash[:notice] %>
+
+<% if user_signed_in? %>
 <h1>レシピ一覧</h1>
 
 <section class ="list">
-
   <div class =list_container>
     <% @recipes.each do |recipe| %>
     <div class ="list_title">
@@ -10,3 +12,11 @@
     <% end %>
   </div>
 </section>
+
+<% else %>
+
+<h1>Recipes_Can</h1>
+  <%= link_to "お試しログイン", users_guest_sign_in_path, method: :post %><br />
+  <%= link_to "新規登録", new_user_registration_path %>
+  
+<% end %>

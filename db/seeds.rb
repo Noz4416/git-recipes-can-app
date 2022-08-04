@@ -29,5 +29,6 @@ Genre.create([
   { name: '洋食'},
   { name: '中華'},
   { name: '時短'},
-  { name: 'その他'}
+  { name: 'その他'},
+  { name: 'お気に入り'},
   ])

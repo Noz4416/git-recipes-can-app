@@ -14,11 +14,11 @@
 
   <!--材料入力フォーム・部分テンプ-->
   <div>材料</div>
-  <section class ="foodstuff">
-    <%= f.fields_for :foodstuffs do |foodstuff| %>
-      <%= render "foodstuff_fields", f: foodstuff %>
+  <section class ="ingredient">
+    <%= f.fields_for :ingredients do |ingredient| %>
+      <%= render "ingredient_fields", f: ingredient %>
     <% end %>
-    <%= link_to_add_fields "材料の追加", f, :foodstuffs %>
+    <%= link_to_add_fields "材料の追加", f, :ingredients %>
   </section>
 
   <!--作り方入力フォーム・部分テンプ-->

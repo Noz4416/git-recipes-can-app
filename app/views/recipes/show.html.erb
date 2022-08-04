@@ -2,8 +2,10 @@
 
 <div class ="detail">
   <!--ユーザーのみ編集ボタン-->
-  <% if user_signed_in? && @recipe.user == current_user %>
+  <% if current_user.own?(recipe) %>
     <%= link_to "編集する", edit_recipe_path, class:"btn recipe-edit-btn" %>
+  <% else
+    <%= render 'bookmark_button', recipe: recipe %>
   <% end %>
 
   <div>
@@ -14,8 +16,8 @@
 
     <p>料理名：<%= @recipe.cuisine_name %></p>
     <p>出来上がり量：<%= @recipe.quantity %></p>
-    <% @recipe.foodstuffs.each do |foodstuff| %>
-      <p>材料：<%= foodstuff.name %><%= foodstuff.amount %></p>
+    <% @recipe.ingredients.each do |ingredient| %>
+      <p>材料：<%= ingredient.material.name %><%= ingredient.amount %></p>
     <% end %>
     <% @recipe.steps.each do |step| %>
       <p>作り方：<%= step.direction %></p>

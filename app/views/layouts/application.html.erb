@@ -15,9 +15,6 @@
     <header>
       <% if user_signed_in? %>
       <li>
-        <%= link_to 'レシピ登録', new_recipe_path %>
-      </li>
-      <li>
         <%= link_to "ログアウト", destroy_user_session_path, {method: :delete} %>
       </li>
       <li>
@@ -32,6 +29,15 @@
       </li>
     <% end %>
     </header>
+
     <%= yield %>
+    <% if current_user.admin? %>
+       <%= link_to "ジャンル編集", genres_path %>
+       <%= link_to "単位編集", units_path %>
+    <% end %>
+    <span id ="button">
+      <%= link_to "+", new_recipe_path, class: 'btn btn-lg rounded-circle ml-auto shadow'%>
+    </span>
+
   </body>
 </html>

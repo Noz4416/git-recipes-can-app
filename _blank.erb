@@ -80,3 +80,6 @@ $(function() {
 
   # exceptでindex以外のページに適応させる
   before_action :set_user, except: [:index]
+
+
+  <%= f.text_field :name, placeholder:"材料", class:"ingredient_name" %>

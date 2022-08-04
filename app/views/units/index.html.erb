@@ -1,0 +1,40 @@
+<div class ="container my-5">
+  <div class ="row ml-5">
+    <h2>単位一覧・追加</h2>
+  </div>
+
+
+  <%= form_with model: @unit, url: units_path, method: :post do |f| %>
+    <div class ="row mt-5">
+      <div class ="col-sm-8">
+        <div class ="form-group row">
+          <%= f.label :"単位名", class: "col-sm-2" %>
+          <%= f.text_field :unit_name, class: "form-control col-sm-5" %></br>
+          <%= f.label :"換算比", class: "col-sm-2" %>
+          <%= f.text_field :g, class: "form-control col-sm-5" %>g</br>
+          <%= f.submit "新規登録", class: "btn btn-success ml-5" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class ="row mt-5">
+    <div class ="col-sm-5">
+      <table class ="table table-bordered text-center">
+        <thead>
+          <tr class ="table-secondary">
+            <th>単位</th>
+            <th colspan ="3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @units.each do |unit| %>
+            <tr>
+              <td><%= unit.unit_name %></td>
+              <td><%= unit.g %>g</td>
+              <td><%= link_to "削除する", unit_path(unit.id), method: :delete, class: "btn btn-success ml-5"%></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+

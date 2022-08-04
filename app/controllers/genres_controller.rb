@@ -5,7 +5,7 @@ class GenresController < ApplicationController
   end
 
   def create
-    genre = Genre.new
+    genre = Genre.new(genre_params)
     genre.save
     redirect_to genres_path
   end
@@ -14,4 +14,11 @@ class GenresController < ApplicationController
     genre = Genre.find(params[:id])
     genre.destroy
     redirect_to genres_path
+  end
+
+  private
+
+  def genre_params
+    params.require(:genre).permit(:name)
+  end
 end
