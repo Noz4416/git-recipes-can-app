@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
-  root to: 'homes#top'
-  get '/about' => 'homes#about', as: "about"
+  root to: 'recipes#index'
+  # get '/about' => 'homes#about', as: "about"
 
   # ゲストログイン用アクション
   devise_scope :user do
@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   patch 'users/withdraw' => 'users#withdraw'
 
 
-  resources :units, only:[:new,:edit]
+  resources :units, only:[:index,:create,:destroy]
   resources :genres, only:[:index,:create,:destroy]
   resources :recipes, only:[:new,:index,:show,:edit,:create,:update,:destroy] do
     collection do

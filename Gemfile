@@ -66,3 +66,11 @@ gem 'httpclient'
 gem 'google-cloud-vision'
 
 gem 'dotenv-rails'
+
+gem 'net-smtp'
+# ついでに以下の2つも追加しておく方が良さそう
+gem 'net-imap'
+gem 'net-pop'
+
+gem "devise-i18n"
+gem "devise-i18n-views"

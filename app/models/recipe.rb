@@ -12,15 +12,16 @@ class Recipe < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
 
 # ネストしたフォームへ
-  has_many :foodstuffs, dependent: :destroy
-  accepts_nested_attributes_for :foodstuffs, allow_destroy: true, reject_if: :all_blank
+  has_many :ingredients, dependent: :destroy
+  accepts_nested_attributes_for :ingredients, allow_destroy: true, reject_if: :all_blank
+  has_many :materials, dependent: :destroy
+  accepts_nested_attributes_for :materials, allow_destroy: true, reject_if: :all_blank
   has_many :steps, dependent: :destroy
   accepts_nested_attributes_for :steps, allow_destroy: true, reject_if: :all_blank
 # タグ付け中間テーブル
   has_many :recipe_genres, dependent: :destroy
   has_many :genres, through: :recipe_genres, dependent: :destroy
   accepts_nested_attributes_for :recipe_genres
-  has_many :nutritions, through: :foodstuffs, dependent: :destroy
 
 
 
@@ -30,7 +31,7 @@ class Recipe < ApplicationRecord
 
 # 栄養素の計算式
   def calculate(column)
-    (nutritions.pluck(column).sum / 100) * (foodstuffs.pluck(:amount).sum)
+    (materials.pluck(column).sum / 100) * (ingredients.pluck(:amount).sum)
   end
 
 

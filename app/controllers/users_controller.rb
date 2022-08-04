@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   def unsubscribe
     @user = current_user
   end
-  
+
   def withdraw
     @user = current_user
     @user.update(is_active: false)
@@ -35,7 +35,8 @@ class UsersController < ApplicationController
   def set_user
     @user = User.find(params[:id])
   end
-  
+
   def user_params
     params.require(:user).permit(:nickname,:is_active,:status,:email,:admin)
+  end
 end

@@ -3,11 +3,10 @@ class RecipesController < ApplicationController
   before_action :authenticate_user!, only: [:new,:edit,:create,:update,:destroy]
   before_action :set_recipe, only: [:show,:edit,:update,:destroy]
 
-
   def new
     @recipe = Recipe.new
     @genres = Genre.all
-    @nutritions = Nutrition.all
+    @materials = Material.all
   end
 
   def create
@@ -22,7 +21,7 @@ class RecipesController < ApplicationController
   end
 
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.all.includes([:user,:bookmarks]).order(created_at: :desc)
   end
 
   def show
@@ -32,7 +31,7 @@ class RecipesController < ApplicationController
   def search
     @q = Recipe.ransack(params[:q])
     @recipes = @q.result(distinct: true).page(params[:page]).per(6)
-    @search = params[:q][:cuisine_name_or_nutritions_name_cont]
+    @search = params[:q][:cuisine_name_or_material_name_cont]
 # 取得したgenre_id_eqをnameに変換
     @search_genre = Genre.find(params[:q][:genre_id_eq]).name
   end
@@ -63,6 +62,10 @@ class RecipesController < ApplicationController
     redirect_to recipes_path, flash: { notice: "「#{@recipe.cusine_name}」のレシピを削除しました。" }
   end
 
+  def bookmarks
+    @bookmark_recipes = current_user.bookmark_recipes.includes(:user).order(created_at: :desc)
+  end
+
 
   private
 
@@ -79,7 +82,7 @@ class RecipesController < ApplicationController
       :image,
       :movie,
       :genre_id,
-      foodstuffs_attributes:[:id,:name,:amount,:_destroy],
+      ingredients_attributes:[:id,:material_id,:amount,:_destroy],
       steps_attributes:[:id,:direction,:_destroy]
     )
   end

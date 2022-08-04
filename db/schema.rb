@@ -10,9 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-
-ActiveRecord::Schema.define(version: 2022_08_01_125301) do
+ActiveRecord::Schema.define(version: 2022_08_02_132334) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -52,35 +50,30 @@ ActiveRecord::Schema.define(version: 2022_08_01_125301) do
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
-  create_table "foodstuffs", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.integer "unit_id"
-    t.integer "amount"
-    t.integer "recipe_id", null: false
-    t.integer "nutrition_id", null: false
-    t.string "name"
-    t.index ["nutrition_id"], name: "index_foodstuffs_on_nutrition_id"
-    t.index ["recipe_id"], name: "index_foodstuffs_on_recipe_id"
-  end
-
   create_table "genres", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
   end
 
-  create_table "nutritions", force: :cascade do |t|
+  create_table "ingredients", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "recipe_id"
+    t.integer "material_id"
+    t.string "amount"
+    t.boolean "unit_flag", default: true, null: false
+  end
 
+  create_table "materials", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
     t.float "calorie"
     t.float "protein"
     t.float "lipid"
     t.float "carbohydrate"
     t.float "salt"
-
-    t.string "name"
   end
 
   create_table "recipe_genres", force: :cascade do |t|
@@ -115,6 +108,7 @@ ActiveRecord::Schema.define(version: 2022_08_01_125301) do
     t.string "unit_name"
     t.integer "ml"
     t.integer "g"
+    t.integer "material_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -135,13 +129,8 @@ ActiveRecord::Schema.define(version: 2022_08_01_125301) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-
   add_foreign_key "bookmarks", "recipes"
   add_foreign_key "bookmarks", "users"
-
-  add_foreign_key "foodstuffs", "nutritions"
-  add_foreign_key "foodstuffs", "recipes"
-
   add_foreign_key "recipe_genres", "genres"
   add_foreign_key "recipe_genres", "recipes"
 end

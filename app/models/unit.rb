@@ -1,5 +1,3 @@
 class Unit < ApplicationRecord
-
-  belongs_to :foodstuff
-
+  belongs_to :material
 end
