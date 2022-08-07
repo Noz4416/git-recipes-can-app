@@ -31,11 +31,15 @@
     </header>
 
     <%= yield %>
-    <% if current_user.admin? %>
-       <%= link_to "ジャンル編集", genres_path %>
-       <%= link_to "単位編集", units_path %>
+  <span id ="button">
+    <% if current_user && current_user.admin? %>
+      <div>
+        <%= link_to "ジャンル編集", genres_path %>
+      </div>
+      <div>
+        <%= link_to "単位編集", units_path %>
+      </div>
     <% end %>
-    <span id ="button">
       <%= link_to "+", new_recipe_path, class: 'btn btn-lg rounded-circle ml-auto shadow'%>
     </span>
 
