@@ -17,3 +17,11 @@ import "./scripts/main";
 Rails.start();
 Turbolinks.start();
 ActiveStorage.start();
+
+
+/*global $*/
+let id = null;
+// datalistのdata-id属性の値の取得
+$("#js-text-field").on('change', function () {
+  id = $("#arealist option[value='" + $(this).val() + "']").data('id');
+});

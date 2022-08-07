@@ -12,23 +12,13 @@
 require 'csv'
 
 
-CSV.foreach('db/nutrition.csv', headers: true) do |row|
-  Nutrition.create(
-    name: row[0],
-    calorie: row[1],
-    protein: row[2],
-    lipid: row[3],
-    carbohydrate: row[4],
-    salt: row[5]
+CSV.foreach('db/materials.csv', headers: true) do |row|
+  Material.create(
+    name: row['name'],
+    calorie: row['calorie'],
+    protein: row['protein'],
+    lipid: row['lipid'],
+    carbohydrate: row['carbohydrate'],
+    salt: row['salt']
   )
 end
-
-
-Genre.create([
-  { name: '和食'},
-  { name: '洋食'},
-  { name: '中華'},
-  { name: '時短'},
-  { name: 'その他'},
-  { name: 'お気に入り'},
-  ])
