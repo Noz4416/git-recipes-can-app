@@ -4,14 +4,13 @@
   <div class ="ingredient_input">
 
 <!--データリストでmaterialテーブルからのフォーム-->
-    <%= f.text_field :material_id, id: "js-text-field", list: "arealists" %>
+    <%= f.text_field :name, id: "js-text-field", list: "arealists" %>
       <datalist id="arealists">
-        <% @materials.each do |material| %>
-          <option value="<%= material.name %>" data-id="<%= material.id %>"></option>
-        <% end %>
+        <%= options_for_select(@materials.map{ |material| [material.name] }) %>
       </datalist>
 <!--分量の入力フォーム-->
     <%= f.text_field :amount, placeholder:"分量", class:"ingredient_amount" %>
+    <%= f.select :unit, Ingredient.units.keys.to_a, {} %>
 
     <%= link_to '#', class:"remove-field-btn" do %>
       <%= image_tag 'delete', class:"remove_fields" %>

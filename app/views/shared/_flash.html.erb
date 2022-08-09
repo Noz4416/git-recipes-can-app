@@ -3,7 +3,8 @@
   <p id ='notice'>
     <%= flash[:notice] %>
   </p>
-<% else @recipe.errors.any? %>
+<% end %>
+<% if @recipe.errors.any? %>
   <ul>
     <% @recipe.errors.full_messages.each do |message| %>
       <li><%= message %></li>

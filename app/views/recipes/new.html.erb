@@ -9,7 +9,7 @@
   </div>
   <div>
     <%= f.label :"出来上がり量" %>
-    <%= f.text_field :quantity, value:"人分" %>
+    <%= f.text_field :quantity, placeholder:"人前" %>
   </div>
 
   <!--材料入力フォーム・部分テンプ-->
@@ -33,13 +33,11 @@
   </section>
 
   <div>
-    <%= f.label :"メモ" %>
     <%= f.label :image, :movie do %>
       <i class="fas fa-camera"></i>
       <%= f.file_field :image, style: 'display:none;' %>
       <%= f.file_field :movie, style: 'display:none;' %>
     <% end %><br>
-    <%= f.text_area :memo %>
   </div>
 
   <div>
