@@ -10,13 +10,14 @@ class RecipesController < ApplicationController
   end
 
   def create
-    recipe = Recipe.new(recipe_params)
-    recipe.user_id = current_user.id
-    if recipe.save
+    @recipe = Recipe.new(recipe_params)
+    @recipe.user_id = current_user.id
+    if @recipe.save
       redirect_to recipes_path, notice: "レシピを登録しました。"
     else
       flash.now[:notice] = "記入の漏れがあります。"
-      redirect_back fallback_location: recipes_path
+      @materials = Material.all
+      render :new
     end
   end
 
@@ -25,7 +26,7 @@ class RecipesController < ApplicationController
   end
 
   def show
-    @title = "#{@recipe.cusine_name}の詳細"
+    @title = "#{@recipe.cuisine_name}"
   end
 
   def search
@@ -38,10 +39,11 @@ class RecipesController < ApplicationController
 
 
   def edit
-    @title = "#{@recipe.cusine_name}の編集"
+    @title = "#{@recipe.cuisine_name}の編集"
+    @materials = Material.all
     @genres = Genre.all
     if @recipe.user == current_user
-      render "edit"
+      render :edit
     else
       redirect_back fallback_location: root_path, flash: { alert: "他人のレシピは編集できません" }
     end
@@ -59,7 +61,7 @@ class RecipesController < ApplicationController
 
   def destroy
     @recipe.destroy
-    redirect_to recipes_path, flash: { notice: "「#{@recipe.cusine_name}」のレシピを削除しました。" }
+    redirect_to recipes_path, flash: { notice: "レシピを削除しました。" }
   end
 
   def bookmarks
@@ -78,11 +80,8 @@ class RecipesController < ApplicationController
       :user_id,
       :cuisine_name,
       :quantity,
-      :memo,
-      :image,
-      :movie,
       :genre_id,
-      ingredients_attributes:[:id,:material_id,:amount,:_destroy],
+      ingredients_attributes:[:id,:name,:unit,:amount,:_destroy],
       steps_attributes:[:id,:direction,:_destroy]
     )
   end

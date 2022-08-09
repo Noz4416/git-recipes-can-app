@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_02_132334) do
+ActiveRecord::Schema.define(version: 2022_08_09_122458) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -63,6 +63,8 @@ ActiveRecord::Schema.define(version: 2022_08_02_132334) do
     t.integer "material_id"
     t.string "amount"
     t.boolean "unit_flag", default: true, null: false
+    t.string "name"
+    t.integer "unit"
   end
 
   create_table "materials", force: :cascade do |t|
@@ -109,6 +111,7 @@ ActiveRecord::Schema.define(version: 2022_08_02_132334) do
     t.integer "ml"
     t.integer "g"
     t.integer "material_id"
+    t.boolean "conversion", default: false, null: false
   end
 
   create_table "users", force: :cascade do |t|

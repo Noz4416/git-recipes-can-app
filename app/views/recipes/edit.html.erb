@@ -33,13 +33,11 @@
   </section>
 
   <div>
-    <%= f.label :"メモ" %>
     <%= f.label :image, :movie do %>
       <i class="fas fa-camera"></i>
       <%= f.file_field :image, style: 'display:none;' %>
       <%= f.file_field :movie, style: 'display:none;' %>
     <% end %><br>
-    <%= f.text_area :memo %>
   </div>
 
   <div>
@@ -52,8 +50,8 @@
 <% end %>
 
 　<div class="cancel">
-　  <%= link_to '編集をやめる', url:recipe_path(@recipe), class:"btn cancel-btn"%>
+　  <%= link_to '編集をやめる', recipe_path(@recipe), class:"btn cancel-btn"%>
 　</div>
 　<div class="cancel">
-　  <%= link_to 'レシピを削除', url:recipe_path, method: :patch, data: { confirm: "削除してよろしいですか？" }, class:"btn cancel-btn"%>
+　  <%= link_to 'レシピを削除', recipe_path, method: :delete, data: { confirm: "削除してよろしいですか？" }, class:"btn cancel-btn"%>
 　</div>
