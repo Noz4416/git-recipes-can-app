@@ -15,12 +15,21 @@
     <header>
       <% if user_signed_in? %>
       <li>
+        <%= link_to "マイページ", users_mypage_path %>
+      </li>
+      <li>
+        <%= link_to "レシピ一覧", root_path %>
+      </li>
+      <li>
         <%= link_to "ログアウト", destroy_user_session_path, {method: :delete} %>
       </li>
       <li>
         <%= render "shared/search" %>
       </li>
     <% else %>
+      <li>
+        <%= link_to "トップページ", root_path %>
+      </li>
       <li>
         <%= link_to "新規登録", new_user_registration_path %>
       </li>
@@ -33,12 +42,16 @@
     <%= yield %>
   <span id ="button">
     <% if current_user && current_user.admin? %>
-      <div>
-        <%= link_to "ジャンル編集", genres_path %>
+      <div class ="admin-button">
+        <%= link_to  genres_path, class: 'btn btn-danger' do %>
+          <i class="fas fa-cog"></i>ジャンル編集
+        <% end %>
       </div>
-      <div>
-        <%= link_to "単位編集", units_path %>
-      </div>
+      <div class ="admin-button">
+        <%= link_to  units_path, class: 'btn btn-danger' do %>
+          <i class="fas fa-cog"></i>単位編集
+        <% end %>
+        </div>
     <% end %>
       <%= link_to "+", new_recipe_path, class: 'btn btn-lg rounded-circle ml-auto shadow'%>
     </span>

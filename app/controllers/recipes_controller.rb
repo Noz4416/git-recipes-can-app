@@ -22,7 +22,11 @@ class RecipesController < ApplicationController
   end
 
   def index
-    @recipes = Recipe.all.includes([:user,:bookmarks]).order(created_at: :desc)
+    if user_signed_in?
+      @recipes = Recipe.includes([:user],[:bookmarks]).where(user_id: current_user.id).order(created_at: :desc)
+    else
+      @recipes = Recipe.all
+    end
   end
 
   def show
@@ -32,9 +36,11 @@ class RecipesController < ApplicationController
   def search
     @q = Recipe.ransack(params[:q])
     @recipes = @q.result(distinct: true).page(params[:page]).per(6)
-    @search = params[:q][:cuisine_name_or_material_name_cont]
+    @search = params[:q][:cuisine_name_or_ingredients_name_cont]
 # 取得したgenre_id_eqをnameに変換
-    @search_genre = Genre.find(params[:q][:genre_id_eq]).name
+# find_byでカラムから探す。tryでエラーではなくnilを返す
+    @search_genre = Genre.find_by(id: params[:q][:genre_id_eq]).try(:name)
+
   end
 
 
