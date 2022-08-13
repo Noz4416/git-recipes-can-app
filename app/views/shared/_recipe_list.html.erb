@@ -2,11 +2,7 @@
   <% @recipes.each do |recipe| %>
     <div class ="table recipe_detail">
       <%= link_to recipe.cuisine_name, recipe_path(recipe) %>
-      <% if recipe.user.status == TRUE %>
-        <%= link_to recipe.user.nickname, user_path(id: recipe.user_id) %>
-      <% else %>
-        非公開
-      <% end %>
+
     </div>
   <% end %>
 </div>

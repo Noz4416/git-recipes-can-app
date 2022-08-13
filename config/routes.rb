@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get 'recipes/search' => 'recipes#search'
   patch 'users/withdraw' => 'users#withdraw'
 
-
+  resources :users, only:[:edit,:update]
   resources :units, only:[:index,:create,:destroy]
   resources :genres, only:[:index,:create,:destroy]
   resources :recipes, only:[:new,:index,:show,:edit,:create,:update,:destroy] do

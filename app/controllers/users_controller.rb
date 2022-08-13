@@ -5,12 +5,11 @@ class UsersController < ApplicationController
 
 
   def show
-    @user = current_user
-    @nickname = "#{@user.nickname}さんのページ"
+    @nickname = "#{@user.nickname}さんの編集ページ"
   end
 
   def edit
-    @nickname = "#{@user.nickname}さんのページの編集"
+    @nickname = "#{@user.nickname}さんの編集ページ"
   end
 
   def update
@@ -33,7 +32,7 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    @user = User.find(params[:id])
+    @user = current_user
   end
 
   def user_params

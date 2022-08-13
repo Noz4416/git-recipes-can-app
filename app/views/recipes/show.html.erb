@@ -3,9 +3,9 @@
 <div class ="detail">
   <!--ユーザーのみ編集ボタン-->
   <% if current_user.own?(@recipe) %>
-    <%= link_to "編集する", edit_recipe_path, class:"btn recipe-edit-btn" %>
+    <%= link_to "編集する", edit_recipe_path, methos: :patch, class:"btn recipe-edit-btn" %>
   <% else %>
-    <%= render 'bookmark_button', recipe: recipe %>
+    <%= render 'bookmark_button', recipe: @recipe %>
   <% end %>
 
   <div>
@@ -23,5 +23,9 @@
       <p>作り方：<%= step.direction %></p>
     <% end %>
     <p>ジャンル：<%= @recipe.genres.name %></p>
+    <!--boolean型はtrueなど必要なし-->
+    <% if @recipe.user.status %>
+      <p>レシピ作成者：<%= @recipe.user.nickname %></p>
+    <% end %>
   </div>
 

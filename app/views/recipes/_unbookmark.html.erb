@@ -1,5 +1,5 @@
 <div class='mr10 float-right'>
-  <%= link_to bookmark_path(current_user.bookmarks.find_by(recipe_id: recipe.id)), id: "js-bookmark-button-for-recipe-#{recipe.id}",class: 'float-right', method: :delete  do %>
-    <%= icon 'fas', 'star' %>
+  <%= link_to bookmark_path(current_user.bookmarks.find_by(recipe_id: recipe.id)), method: :delete, id: "js-bookmark-button-for-recipe-#{recipe.id}" do %>
+    <i class="fas fa-star"></i>
   <% end %>
 </div>

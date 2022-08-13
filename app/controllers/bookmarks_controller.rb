@@ -7,10 +7,11 @@ class BookmarksController < ApplicationController
   end
 
   def destroy
-    recipe = current_user.bookmarks.find(params[:recipe_id]).recipe
+    recipe = current_user.bookmarks.find(params[:id]).recipe
     current_user.unbookmark(recipe)
   # ユーザーが直前にリクエストを送ったページに戻す
     redirect_back fallback_location: root_path
   end
+
 
 end
