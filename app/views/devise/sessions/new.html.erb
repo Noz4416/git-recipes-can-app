@@ -1,30 +1,44 @@
-<h2>ログイン</h2>
-
-<%= form_with model:@user, url:user_session_path do |f| %>
-
-  <div class ="field">
-    <%= f.label :"ニックネーム" %><br>
-    <%= f.text_field :nickname, autofocus: true %>
+<div class ="container my-5">
+  <div class ="row ml-3">
+    <div class ="offset-sm-1">
+      <h3>ログイン</h3>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :"メールアドレス" %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
+  <%= form_with model:@user, url:user_session_path do |f| %>
+    <div class ="row mt-5 ml-5">
+      <div class ="col-sm-12">
 
-  <div class="field">
-    <%= f.label :"パスワード" %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+        <div class ="form-group row">
+          <%= f.label :"ニックネーム", class:"col-sm-2"%>
+          <%= f.text_field :nickname, autofocus: true, class:"form-control offset-sm-1 col-sm-4" %>
+        </div>
 
-  <div class="actions">
-    <%= f.submit "ログイン" %>
-  </div>
-<% end %>
+        <div class="form-group row">
+          <%= f.label :"メールアドレス", class:"col-sm-2" %>
+          <%= f.email_field :email, autocomplete: "email", class:"form-control offset-sm-1 col-sm-4" %>
+        </div>
 
-<div>
-  <h4>会員登録がお済みでない方は</h4>
-</div>
-<div>
-  <h5><%= render "devise/shared/links" %>から新期登録を行ってください。</h5>
+        <div class="form-group row">
+          <%= f.label :"パスワード", class:"col-sm-2" %>
+          <%= f.password_field :password, autocomplete: "current-password", class:"form-control offset-sm-1 col-sm-4" %>
+        </div>
+
+        <div class="actions row">
+          <%= f.submit "ログイン", class:"btn btn-success offset-sm-3 col-sm-3 mt-4" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+    <div class ="row mt-5 ml-2">
+      <div class ="offset-sm-1">
+        <h3>会員登録がお済みでない方は</h3>
+      </div>
+    </div>
+    <div class ="row my-3">
+      <div class ="offset-sm-1">
+        <h4><%= render "devise/shared/links" %>から新規登録を行ってください。</h4>
+      </div>
+    </div>
 </div>

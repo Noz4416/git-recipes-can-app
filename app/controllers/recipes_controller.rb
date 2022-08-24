@@ -12,7 +12,22 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params)
     @recipe.user_id = current_user.id
-    if @recipe.save
+    # GoogleCloudVisionAPI用の記述
+    if recipe_params[:image]
+      Vision.get_image_data(recipe_params[:image]) # or params[:recipe][:image]
+      @recipe.save
+      count = params[:recipe][:material_count].to_i
+      Ingredient.order('id DESC').limit(count).each do |ing|
+        material = Material.find_by(name: ing.name)
+        ing.update(material_id: material.id)
+      end
+      redirect_to edit_recipe_path(@recipe)
+    elsif @recipe.save
+      count = params[:recipe][:material_count].to_i
+      Ingredient.order('id DESC').limit(count).each do |ing|
+        material = Material.find_by(name: ing.name)
+        ing.update(material_id: material.id)
+      end
       redirect_to recipes_path, notice: "レシピを登録しました。"
     else
       flash.now[:notice] = "記入の漏れがあります。"
@@ -31,6 +46,14 @@ class RecipesController < ApplicationController
 
   def show
     @title = "#{@recipe.cuisine_name}"
+    #byebug
+    #@recipe.ingredients.each do |ingredient|
+    #unit = Unit.where(material_id: ingredient.material_id).where(unit_name(数字): ingredient.unit)
+  # translated_igr = unit.gram * ingredients.amout
+    #  translated_igr = #グラム単位に変換する処理
+    #  @calorie += translated_igr.calculate(:calorie)
+      # @protein
+    #end
   end
 
   def search
@@ -40,7 +63,6 @@ class RecipesController < ApplicationController
 # 取得したgenre_id_eqをnameに変換
 # find_byでカラムから探す。tryでエラーではなくnilを返す
     @search_genre = Genre.find_by(id: params[:q][:genre_id_eq]).try(:name)
-
   end
 
 
@@ -58,7 +80,7 @@ class RecipesController < ApplicationController
   def update
     @recipe.update(recipe_params)
     if @recipe.save
-      redirect_to recipe_path(@recipe), flash: { notice: "「#{@recipe.cusine_name}」のレシピを更新しました。" }
+      redirect_to recipe_path(@recipe), flash: { notice: "「#{@recipe.cuisine_name}」のレシピを更新しました。" }
     else
       flash.now[:notice] = "記入の漏れがあります。"
       redirect_back fallback_location: recipe_path(@recipe)
@@ -87,8 +109,10 @@ class RecipesController < ApplicationController
       :cuisine_name,
       :quantity,
       :genre_id,
-      ingredients_attributes:[:id,:name,:unit,:amount,:_destroy],
-      steps_attributes:[:id,:direction,:_destroy]
+      :image,
+      :video,
+      ingredients_attributes: [:id, :name, :unit, :amount, :_destroy],
+      steps_attributes: [:id, :direction, :_destroy]
     )
   end
 
