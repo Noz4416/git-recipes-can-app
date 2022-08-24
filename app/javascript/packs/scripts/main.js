@@ -22,6 +22,7 @@ class addFields {
     let regexp = linkId ? new RegExp(linkId, 'g') : null;
     let newFields = regexp ? link.dataset.fields.replace(regexp, time) : null;
     newFields ? link.insertAdjacentHTML('beforebegin', newFields) : null ;
+    $('#recipe_material_count').val($('section.ingredient > .nested-fields:not(.deletedElement)').length);
   }
 }
 
@@ -51,7 +52,9 @@ class removeFields {
     if (deleteField) {
       deleteField.value = 1;
       fieldParent.style.display = 'none';
+      link.parentElement.parentElement.parentElement.classList.add('deletedElement');
     }
+    $('#recipe_material_count').val($('section.ingredient > .nested-fields:not(.deletedElement)').length);
   }
 }
 

@@ -1,25 +1,29 @@
-<h1>Search Index</h1>
+<div class ="container my-4">
+  <div class ="row my-3">
+    <h3>Search Index</h3>
+  </div>
 
-<div>
   <% if @search.present? %>
+    <div class ="row">
     「<%= @search %>」の検索結果
-
+    </div>
     <%= render 'shared/recipe_list' %>
 
   <% elsif @search_genre.present? %>
+    <div class ="row">
     「<%= @search_genre %>」の検索結果
+    </div>
 
     <%= render 'shared/recipe_genre' %>
-
   <% else %>
+    <div class ="row">
     "該当する検索結果はありません。"
+    </div>
   <% end %>
-</div>
-
-
 
   <%= paginate @recipes %>
 
-  <div class ="cancel">
+  <div class ="cancel my-4">
     <%= link_to 'レシピ一覧に戻る', recipes_path %>
   </div>
+</div>

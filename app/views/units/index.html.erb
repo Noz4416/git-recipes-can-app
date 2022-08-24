@@ -6,13 +6,25 @@
 
   <%= form_with model: @unit, url: units_path, method: :post do |f| %>
     <div class ="row mt-5">
-      <div class ="col-sm-8">
+      <div class ="col-sm-6">
+        <div class ="form-group row">
+          <%= f.label :"食材名", class:"col-sm-2" %>
+          <%= f.text_field :unit_name, id: "js-text-field", list: "arealists", class:"form-control col-sm-5" %>
+          <datalist id="arealists">
+            <%= options_for_select(@materials.map{ |material| [material.name] }) %>
+          </datalist>
+        </div>
+
         <div class ="form-group row">
           <%= f.label :"単位名", class: "col-sm-2" %>
-          <%= f.text_field :unit_name, class: "form-control col-sm-5" %></br>
+          <%= f.select :unit, Ingredient.units.keys.to_a, {}, class:"form-control col-sm-5" %>
+        </div>
+        <div class ="from-group row">
           <%= f.label :"換算比", class: "col-sm-2" %>
-          <%= f.text_field :g, class: "form-control col-sm-5" %>g</br>
-          <%= f.submit "新規登録", class: "btn btn-success ml-5" %>
+          <%= f.text_field :g, class: "form-control col-sm-5" %><h4>g</h4>
+        </div>
+        <div class ="action my-4">
+          <%= f.submit "新規登録", class:"btn btn-success offset-3" %>
         </div>
       </div>
     </div>
@@ -23,14 +35,16 @@
       <table class ="table table-bordered text-center">
         <thead>
           <tr class ="table-secondary">
-            <th>単位</th>
-            <th colspan ="3"></th>
+            <th><h5>食材名</h5></th>
+            <th><h5>単位名</h5></th>
+            <th colspan ="3"><h5>g</h5></th>
           </tr>
         </thead>
         <tbody>
           <% @units.each do |unit| %>
             <tr>
               <td><%= unit.unit_name %></td>
+              <td><%= unit.unit %></td>
               <td><%= unit.g %>g</td>
               <td><%= link_to "削除する", unit_path(unit.id), method: :delete, class: "btn btn-success ml-5"%></td>
             </tr>

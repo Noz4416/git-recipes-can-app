@@ -1,16 +1,15 @@
 <!--材料のフォーム-->
 <div class ="nested-fields">
   <%= f.hidden_field :_destroy %>
-  <div class ="ingredient_input">
-
+  <div class ="ingredient_input row">
 <!--データリストでmaterialテーブルからのフォーム-->
-    <%= f.text_field :name, id: "js-text-field", list: "arealists" %>
+    <%= f.text_field :name, id: "js-text-field", list: "arealists", class:"form-control offset-3 col-sm-3 border-top-0 border-left-0 border-right-0 border-warning" %>
       <datalist id="arealists">
         <%= options_for_select(@materials.map{ |material| [material.name] }) %>
       </datalist>
 <!--分量の入力フォーム-->
-    <%= f.text_field :amount, placeholder:"分量", class:"ingredient_amount" %>
-    <%= f.select :unit, Ingredient.units.keys.to_a, {} %>
+    <%= f.text_field :amount, placeholder:"分量", class:"quantity form-control col-sm-3 border-top-0 border-left-0 border-right-0 border-warning" %>
+    <%= f.select :unit, Ingredient.units.keys.to_a, {}, class:"form-control col-sm-2 border-top-0 border-left-0 border-right-0 border-warning" %>
 
     <%= link_to '#', class:"remove-field-btn" do %>
       <%= image_tag 'delete', class:"remove_fields" %>

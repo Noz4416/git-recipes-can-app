@@ -1,12 +1,9 @@
 <%= search_form_for @q, url: recipes_search_path do |f| %>
-
 <!--ジャンル選択フォーム-->
-
   <%= f.collection_select :genre_id_eq, @genres, :id, :name, :include_blank => '指定しない', class:'genre-select'  %>
 <!--検索フォーム-->
   <%= f.search_field :cuisine_name_or_ingredients_name_cont, placeholder: 'レシピ名・食材名で探す', class:'input-box' %>
   <%= f.button type: "submit", class:"search-btn" do %>
     <i class="fas fa-search"></i>
-
   <% end %>
 <% end %>
