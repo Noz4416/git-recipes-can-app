@@ -1,7 +1,7 @@
 class UnitsController < ApplicationController
   def index
     @unit = Unit.new
-    @units = Unit.all
+    @units = Unit.all.page(params[:page]).per(9)
     @materials = Material.all
   end
 
@@ -20,6 +20,6 @@ class UnitsController < ApplicationController
   private
 
   def unit_params
-    params.require(:unit).permit(:unit_name,:unit,:g)
+    params.require(:unit).permit(:material_id, :unit, :g)
   end
 end
