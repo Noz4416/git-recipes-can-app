@@ -10,7 +10,6 @@ class CreateMaterials < ActiveRecord::Migration[6.1]
       t.float :lipid
       t.float :carbohydrate
       t.float :salt
-
     end
   end
 end

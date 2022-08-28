@@ -46,14 +46,11 @@ class RecipesController < ApplicationController
 
   def show
     @title = "#{@recipe.cuisine_name}"
-    #byebug
-    #@recipe.ingredients.each do |ingredient|
-    #unit = Unit.where(material_id: ingredient.material_id).where(unit_name(数字): ingredient.unit)
-  # translated_igr = unit.gram * ingredients.amout
-    #  translated_igr = #グラム単位に変換する処理
-    #  @calorie += translated_igr.calculate(:calorie)
-      # @protein
-    #end
+    @calorie = @recipe.calculate(:calorie, @recipe).floor(0)
+    @protein = @recipe.calculate(:protein, @recipe)
+    @lipid = @recipe.calculate(:lipid, @recipe)
+    @carbohydrate = @recipe.calculate(:carbohydrate, @recipe)
+    @salt = @recipe.calculate(:salt, @recipe)
   end
 
   def search
@@ -102,6 +99,7 @@ class RecipesController < ApplicationController
   def set_recipe
     @recipe = Recipe.find(params[:id])
   end
+
 
   def recipe_params
     params.require(:recipe).permit(
