@@ -30,16 +30,28 @@ class Recipe < ApplicationRecord
   end
 
 # 栄養素の計算式
-  def calculate(column)
-    # "#{column}:#{ingredients[1].material["#{column}"]}:#{ingredients.pluck(:amount).map(&:to_i).sum}"
+  def calculate(column, recipe)
     materials_sum = 0
-    ingredients.each do |ing|
+    convert_amount = 0
+    materials_amount = 0
+
+    recipe.ingredients.each do |ing|
       materials_sum += ing.material["#{column}"]
+# 単位による条件分岐
+      if ing.unit == ('g'||'cc'||'ml')
+        materials_amount += ing.amount.to_f
+      elsif ing.unit == 'kg'
+        materials_amount += (ing.amount.to_f) * 1000
+      elsif ing.unit == 'mg'
+        materials_amount += (ing.amount.to_f) * 0.001
+      else
+        unit = Unit.where(material_id: ing.material_id).where(unit: ing.unit)
+        convert_amount += (unit[0].g * ing.amount.to_f)
+      end
     end
-      materials_amount = ingredients.pluck(:amount).map(&:to_i).sum
-      (materials_sum / 100) * materials_amount
-    # (materials.pluck(column).sum / 100) * (ingredients.pluck(:amount).sum)
+    ((materials_sum / 100) * (convert_amount + materials_amount)).floor(1)
   end
+
 
   def get_image(width,height)
     unless image.attached?

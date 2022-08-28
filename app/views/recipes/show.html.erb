@@ -2,7 +2,7 @@
 
 <div class ="container my-4">
   <div class ="row mx-3 mt-3">
-    <h2><%= @title %></h2>
+    <h2 class ="font-weight-bold"><%= @title %></h2>
   </div>
   <div class ="row">
     <div class ="offset-sm-3 col-sm-3 mb-3">
@@ -24,7 +24,7 @@
       </div>
     </div>
     <table class ="table table-borderless col-sm-6">
-      <tbody>
+      <tbody class ="h5">
         <tr>
           <td class ="col-sm-3">料理名：</td>
           <td class ="col-sm-7"><%= @recipe.cuisine_name %></td>
@@ -66,12 +66,29 @@
     </table>
   </div>
   <!--栄養素の計算表示-->
-  <div class ="materials-field">
-    <p>カロリー：<%= @recipe.calculate(:calorie) %></p>
-    <p>たんぱく質：<%= @recipe.calculate(:protein) %></p>
-    <p>脂質：<%= @recipe.calculate(:lipid) %></p>
-    <p>炭水化物：<%= @recipe.calculate(:carbohydrate) %></p>
-    <p>塩分：<%= @recipe.calculate(:salt) %></p>
+  <div class ="row">
+    <h5>
+      <table class ="table table-borderless">
+        <tr>
+          <td><h4 class ="bg-warning">栄養成分表</h4></td>
+        </tr>
+        <tr>
+          <td>カロリー：</td><td><%= @calorie %>kcal</td>
+        </tr>
+        <tr>
+          <td>たんぱく質：</td><td><%= @protein %>g</td>
+        </tr>
+        <tr>
+          <td>脂質：</td><td><%= @lipid %>g</td>
+        </tr>
+        <tr>
+          <td>炭水化物：</td><td><%= @carbohydrate %>g</td>
+        </tr>
+        <tr>
+          <td>塩分：</td><td><%= @salt %>g</td>
+        </tr>
+      </table>
+    </h5>
   </div>
 </div>
 
