@@ -1,5 +1,5 @@
 <% if @bookmark_recipes.present? %>
-  <%= render @bookmark_recipes %>
+  <%= render "bookmark.index", bookmarks: @bookmarks %>
 <% else %>
   <p>お気に入りしたレシピはありません。</p>
 <% end %>

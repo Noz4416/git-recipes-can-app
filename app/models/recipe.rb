@@ -15,6 +15,7 @@ class Recipe < ApplicationRecord
   belongs_to :genre
 
   has_many :bookmarks, dependent: :destroy
+  has_many :bookmark_recipes, through: :bookmarks, source: :user
 
 # ネストしたフォームへ
   has_many :ingredients, dependent: :destroy
@@ -25,9 +26,9 @@ class Recipe < ApplicationRecord
   accepts_nested_attributes_for :steps, allow_destroy: true, reject_if: :all_blank
 
 
-  def bookmarked_by?(user)
-    bookmarks.where(user_id: user).exists?
-  end
+  # def bookmarked_by?(user)
+  #   bookmarks.where(user_id: user).exists?
+  # end
 
 # 栄養素の計算式
   def calculate(column, recipe)

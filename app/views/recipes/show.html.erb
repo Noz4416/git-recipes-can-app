@@ -9,7 +9,9 @@
       <% if current_user.own?(@recipe) %>
         <%= link_to "編集する", edit_recipe_path(@recipe), class:"btn btn-primary" %>
       <% else %>
-        <%= render 'bookmark_button', recipe: @recipe %>
+        <%= link_to bookmarks_path(recipe_id: @recipe.id), method: :post, class: 'btn btn-primary' do %>
+          <i class="fas fa-clone"></i> お気に入りに登録
+   ​    <% end %>
       <% end %>
     </div>
   </div>
@@ -19,7 +21,7 @@
       <!--画像か動画が添付されている時-->
       <div>
         <% if @recipe.image.attached? %>
-          <div><%= image_tag @recipe.get_image(200,200) %></div>
+          <div><%= image_tag @recipe.get_image(500,500) %></div>
         <% end %>
       </div>
     </div>
