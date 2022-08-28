@@ -9,10 +9,9 @@
     <section class ="form row">
       <div class ="col-5">
         <h4 class ="recipe-form">写真
-          <%= f.label :image, :movie do %>
+          <%= f.label :image do %>
             <i class="fas fa-camera"></i>
             <%= f.file_field :image, style: 'display:none;' %>
-            <%= f.file_field :movie, style: 'display:none;' %>
           <% end %>
         </h4>
         <div class="photo-area">
@@ -64,5 +63,3 @@
     </section>
   <% end %>
 </div>
-
-rails db:migrate:down VERSION=

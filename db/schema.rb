@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_28_042543) do
+ActiveRecord::Schema.define(version: 2022_08_28_104618) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -62,7 +62,6 @@ ActiveRecord::Schema.define(version: 2022_08_28_042543) do
     t.integer "recipe_id"
     t.integer "material_id"
     t.string "amount"
-    t.boolean "unit_flag", default: true, null: false
     t.string "name"
     t.integer "unit"
   end
@@ -84,7 +83,6 @@ ActiveRecord::Schema.define(version: 2022_08_28_042543) do
     t.integer "user_id"
     t.string "cuisine_name"
     t.string "quantity"
-    t.string "memo"
     t.integer "genre_id"
   end
 
@@ -98,10 +96,8 @@ ActiveRecord::Schema.define(version: 2022_08_28_042543) do
   create_table "units", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "ml"
     t.integer "g"
     t.integer "material_id"
-    t.boolean "conversion", default: false, null: false
     t.integer "unit"
   end
 

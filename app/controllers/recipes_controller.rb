@@ -13,16 +13,16 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new(recipe_params)
     @recipe.user_id = current_user.id
     # GoogleCloudVisionAPI用の記述
-    if recipe_params[:image]
-      Vision.get_image_data(recipe_params[:image]) # or params[:recipe][:image]
-      @recipe.save
-      count = params[:recipe][:material_count].to_i
-      Ingredient.order('id DESC').limit(count).each do |ing|
-        material = Material.find_by(name: ing.name)
-        ing.update(material_id: material.id)
-      end
-      redirect_to edit_recipe_path(@recipe)
-    elsif @recipe.save
+    # if recipe_params[:image]
+    #   Vision.get_image_data(recipe_params[:image]) # or params[:recipe][:image]
+    #   @recipe.save
+    #   count = params[:recipe][:material_count].to_i
+    #   Ingredient.order('id DESC').limit(count).each do |ing|
+    #     material = Material.find_by(name: ing.name)
+    #     ing.update(material_id: material.id)
+    #   end
+    #   redirect_to edit_recipe_path(@recipe)
+    if @recipe.save
       count = params[:recipe][:material_count].to_i
       Ingredient.order('id DESC').limit(count).each do |ing|
         material = Material.find_by(name: ing.name)
@@ -75,8 +75,11 @@ class RecipesController < ApplicationController
   end
 
   def update
-    @recipe.update(recipe_params)
-    if @recipe.save
+    if @recipe.update(recipe_params)
+    @recipe.ingredients.each do |ing|
+      material = Material.find_by(name: ing.name)
+      ing.update(material_id: material.id)
+    end
       redirect_to recipe_path(@recipe), flash: { notice: "「#{@recipe.cuisine_name}」のレシピを更新しました。" }
     else
       flash.now[:notice] = "記入の漏れがあります。"
@@ -87,10 +90,6 @@ class RecipesController < ApplicationController
   def destroy
     @recipe.destroy
     redirect_to recipes_path, flash: { notice: "レシピを削除しました。" }
-  end
-
-  def bookmarks
-    @bookmark_recipes = current_user.bookmark_recipes.includes(:user).order(created_at: :desc)
   end
 
 
@@ -108,7 +107,6 @@ class RecipesController < ApplicationController
       :quantity,
       :genre_id,
       :image,
-      :video,
       ingredients_attributes: [:id, :name, :unit, :amount, :_destroy],
       steps_attributes: [:id, :direction, :_destroy]
     )
