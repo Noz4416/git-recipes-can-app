@@ -1,4 +1,4 @@
-
+/*global $*/
 class addFields {
   constructor(){
     this.links = document.querySelectorAll('.add_fields');
@@ -60,3 +60,18 @@ class removeFields {
 
 window.addEventListener('turbolinks:load',() => new removeFields());
 
+
+// プレビュー機能
+window.addEventListener('turbolinks:load', () => {
+  const preview = document.querySelector('.preview');
+  if (!preview) return;
+  preview.addEventListener('change', (e) => {
+    const file = preview.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      const image = reader.result;
+      document.querySelector('.uploader').setAttribute('src', image);
+    };
+  });
+});

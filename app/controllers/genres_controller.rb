@@ -6,13 +6,13 @@ class GenresController < ApplicationController
 
   def create
     genre = Genre.new(genre_params)
-    genre.save
+    genre.save!
     redirect_to genres_path
   end
 
   def destroy
     genre = Genre.find(params[:id])
-    genre.destroy
+    genre.destroy!
     redirect_to genres_path
   end
 

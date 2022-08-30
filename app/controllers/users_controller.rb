@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.update(user_params)
+    @user.update!(user_params)
     redirect_to users_mypage_path(@user)
   end
 
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
 
   def withdraw
     @user = current_user
-    @user.update(is_active: false)
+    @user.update!(is_active: false)
     reset_session
     flash[:notice] = "退会処理を完了いたしました。"
     redirect_to root_path

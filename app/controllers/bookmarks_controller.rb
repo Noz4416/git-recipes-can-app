@@ -1,9 +1,7 @@
 class BookmarksController < ApplicationController
 
   def create
-    # require 'active_support/all'
     recipe = Recipe.find(params[:recipe_id])
-    # current_user.bookmark(recipe)
     @bookmark = current_user.recipes.new(recipe.dup.attributes)
     recipe.ingredients.each do |ingredient|
       @bookmark.ingredients.new(ingredient.dup.attributes)
@@ -12,9 +10,13 @@ class BookmarksController < ApplicationController
       @bookmark.steps.new(step.dup.attributes)
     end
     @bookmark.genre_id = 6
-    @bookmark.save
-    # byebug
-
+    @bookmark.save!
+# 保存をするために、先にsaveして@bookmark.idを確定させる
+# blobのioが閉じる前に読み書きする必要がある
+    recipe.image.blob.open do |tempfile|
+      @bookmark.image.attach(io: tempfile, filename: recipe.image.filename)
+      @bookmark.image.save!
+    end
     redirect_to recipe_path(@bookmark)
   end
 
