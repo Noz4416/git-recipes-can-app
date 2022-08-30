@@ -1,23 +1,22 @@
 <%= render 'shared/flash' %>
 
 <div class ="container my-4">
-  <div class ="row mx-3 my-3">
-    <h2><%= @title %></h2>
+  <div class ="row mx-3 my-4">
+    <div class ="h2 font-weight-bold"><%= @title %></div>
   </div>
-  <%= form_with model: @recipe, url:recipe_path, method: :patch do |f| %>
-    <section class ="row border-top border-bottom border-warning border-5">
-      <div class ="col-5">
+  <%= form_with model: @recipe, url: recipe_path, method: :patch do |f| %>
+    <section class ="form row h5 border-top border-bottom border-warning border-5">
+      <div class ="col-5 my-4">
         <h4 class ="recipe-form">写真
           <%= f.label :image do %>
             <i class="fas fa-camera"></i>
-            <%= f.file_field :image, style: 'display:none;' %>
+            <%= f.file_field :image, class: 'preview', style: 'display:none;' %>
           <% end %>
         </h4>
-        <div class="photo-area">
-          <%= image_tag "no_image"%>
-        </div>
+        <%= image_tag @recipe.get_image(450,450), class: "uploader img-fluid ml-3" %>
       </div>
-      <div class ="col-6">
+
+      <div class ="offset-1 col-6 my-4">
         <div class ="form-group row">
           <%= f.label :"料理名", class:"col-4" %>
           <%= f.text_field :cuisine_name, class:"form-control col-6 border-top-0 border-left-0 border-right-0 border-warning"%>
@@ -54,15 +53,15 @@
           <%= f.label :"ジャンル", class:"col-4" %>
           <%= f.collection_select :genre_id, @genres, :id, :name, prompt: "選択してください", class:"form-control col-6" %>
         </div>
-        <div class ="action row">
-          <%= f.submit "編集する", class:"offset-4 col-sm-4 btn btn-lg btn-success" %>
+        <div class ="action row my-5">
+          <%= f.submit "編集する", class:"offset-4 col-4 btn btn-lg btn-success" %>
         </div>
       </div>
     </section>
   <% end %>
 
   <div clss ="row">
-    <div class="ol-sm-7 my-4">
+    <div class="col-7 my-5">
       <%= link_to '編集をやめる', recipe_path(@recipe), class:"btn btn-lg btn-primary ml-5"%>
       <%= link_to 'レシピを削除', recipe_path, method: :delete, data: { confirm: "削除してよろしいですか？" }, class:"btn btn-lg btn-danger ml-5"%>
     </div>

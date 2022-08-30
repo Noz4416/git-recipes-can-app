@@ -26,7 +26,7 @@ class RecipesController < ApplicationController
       count = params[:recipe][:material_count].to_i
       Ingredient.order('id DESC').limit(count).each do |ing|
         material = Material.find_by(name: ing.name)
-        ing.update(material_id: material.id)
+        ing.update!(material_id: material.id)
       end
       redirect_to recipes_path, notice: "レシピを登録しました。"
     else
@@ -88,7 +88,7 @@ class RecipesController < ApplicationController
   end
 
   def destroy
-    @recipe.destroy
+    @recipe.destroy!
     redirect_to recipes_path, flash: { notice: "レシピを削除しました。" }
   end
 

@@ -1,24 +1,22 @@
 <%= render 'shared/flash' %>
 
-<div class ="container m-5">
+<div class ="container my-4">
   <div class ="row my-4">
-    <h3>レシピ登録</h3>
+    <div class ="h2 font-weight-bold">レシピ登録</div>
   </div>
   <%= form_with model: @recipe, url: recipes_path, method: :post do |f| %>
-  <!--%= f.hidden_field :image_cache %-->
-    <section class ="form row">
-      <div class ="col-5">
+    <section class ="form row h5 border-top border-bottom border-warning border-5">
+      <div class ="col-5 my-4">
         <h4 class ="recipe-form">写真
           <%= f.label :image do %>
             <i class="fas fa-camera"></i>
-            <%= f.file_field :image, style: 'display:none;' %>
+            <%= f.file_field :image, class: 'preview', style: 'display:none;' %>
           <% end %>
         </h4>
-        <div class="photo-area">
-          <%= image_tag "no_image"%>
-        </div>
+        <%= image_tag 'no_img', class: "uploader img-fluid ml-3", :size => '450x450' %>
       </div>
-      <div class ="col-6">
+
+      <div class ="offset-1 col-6 my-4">
         <div class ="form-group row">
           <%= f.label :"料理名", class:"col-4" %>
           <%= f.text_field :cuisine_name, class:"form-control col-6 border-top-0 border-left-0 border-right-0 border-warning"%>
@@ -31,23 +29,23 @@
         <div class ="form-group row">
           <div class ="col-4">材料</div>
         </div>
-        <section class ="ingredient">
+        <section class ="ingredient my-3">
           <%= f.fields_for :ingredients do |ingredient| %>
             <%= render "ingredient_fields", f: ingredient %>
           <% end %>
-          <%= link_to_add_fields "材料の追加", f, :ingredients%>
+          <%= link_to_add_fields "《材料の追加》", f, :ingredients %>
         </section>
 
   <!--作り方入力フォーム・部分テンプ-->
         <div  class ="form-group row">
           <div class ="col-4">作り方</div>
         </div>
-        <section class ="step">
+        <section class ="step my-3">
           <div class ="field">
             <%= f.fields_for :steps do |step| %>
               <%= render "step_fields", f: step %>
             <% end %>
-            <%= link_to_add_fields "作り方の追加", f, :steps %>
+            <%= link_to_add_fields "《作り方の追加》", f, :steps %>
           </div>
         </section>
 

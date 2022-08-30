@@ -2,7 +2,7 @@
   <% @recipes.each do |recipe| %>
     <tr class ="font-weight-bold">
       <td class ="col-2">
-        <%= image_tag recipe.get_image(80,80) %>
+        <%= image_tag recipe.get_image(100,100) %>
       </td>
       <td class ="col-6">
         <%= link_to recipe.cuisine_name, recipe_path(recipe.id)%>
