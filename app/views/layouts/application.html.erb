@@ -62,7 +62,9 @@
             <% end %>
           </div>
         <% end %>
-        <%= link_to "+", new_recipe_path, class: 'btn btn-lg rounded-circle ml-auto shadow'%>
+        <% if user_signed_in? %>
+          <%= link_to "+", new_recipe_path, class: 'btn btn-lg rounded-circle ml-auto shadow'%>
+        <% end %>
       </span>
     </main>
     <footer class ="footer text-black", style ="background-color: #ffec47;">

@@ -37,7 +37,10 @@ class Recipe < ApplicationRecord
     materials_amount = 0
 
     recipe.ingredients.each do |ing|
-      materials_sum += ing.material["#{column}"]
+      unless ing.material_id
+      next
+      end
+        materials_sum += ing.material["#{column}"]
 # 単位による条件分岐
       if ing.unit == ('g'||'cc'||'ml')
         materials_amount += ing.amount.to_f
@@ -46,8 +49,11 @@ class Recipe < ApplicationRecord
       elsif ing.unit == 'mg'
         materials_amount += (ing.amount.to_f) * 0.001
       else
-        unit = Unit.where(material_id: ing.material_id).where(unit: ing.unit)
-        convert_amount += (unit[0].g * ing.amount.to_f)
+        if
+          unit = Unit.where(material_id: ing.material_id).where(unit: ing.unit).present?
+          convert_amount += (unit[0].g * ing.amount.to_f)
+        next
+        end
       end
     end
     ((materials_sum / 100) * (convert_amount + materials_amount)).floor(1)
