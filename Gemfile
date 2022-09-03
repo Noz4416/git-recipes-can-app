@@ -65,9 +65,9 @@ gem 'ransack'
 
 gem 'httpclient'
 
-gem 'google-cloud-vision'
+# gem 'google-cloud-vision'
 
-gem 'dotenv-rails'
+# gem 'dotenv-rails'
 
 gem 'net-smtp'
 # ついでに以下の2つも追加しておく方が良さそう
