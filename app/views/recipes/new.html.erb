@@ -28,7 +28,10 @@
   <!--材料入力フォーム・部分テンプ-->
         <div class="form-group row">
           <div class="col-3">材料</div>
-          <i class="fas fa-exclamation-circle text-muted"></i>
+          <div tabindex="0" data-toggle="popover" data-trigger="focus" title="注意事項"
+          data-content="野菜などの重さが一定でない食材は、おおよその重さを入力いただかないと、栄養素の計算ができない場合があります。">
+            <i class="fas fa-exclamation-circle text-muted"></i>
+          </div>
           <h6 class="text-muted">食材量の入力はg単位推奨</h6>
         </div>
         <section class="ingredient my-3">
@@ -63,3 +66,4 @@
     </section>
   <% end %>
 </div>
+

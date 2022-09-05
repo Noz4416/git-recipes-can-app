@@ -1,7 +1,5 @@
 const { environment } = require('@rails/webpacker');
 
-module.exports = environment;
-
 
 const webpack = require('webpack');
 environment.plugins.prepend(
@@ -9,7 +7,19 @@ environment.plugins.prepend(
   new webpack.ProvidePlugin({
     $: 'jquery/src/jquery',
     jQuery: 'jquery/src/jquery',
-    Popper: 'popper.js'
+    Popper: ['popper.js', 'default']
   })
 );
+
+environment.config.merge(
+  module.exports = {
+    resolve: {
+      alias: {
+        jquery: 'jquery/src/jquery',
+      }
+    }
+  }
+)
+
+module.exports = environment
 
