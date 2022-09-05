@@ -1,4 +1,5 @@
 class UnitsController < ApplicationController
+
   def index
     @unit = Unit.new
     @units = Unit.all.page(params[:page]).per(9)

@@ -23,6 +23,10 @@ class addFields {
     let newFields = regexp ? link.dataset.fields.replace(regexp, time) : null;
     newFields ? link.insertAdjacentHTML('beforebegin', newFields) : null ;
     $('#recipe_material_count').val($('section.ingredient > .nested-fields:not(.deletedElement)').length);
+    $('.steps-wrapper > .nested-fields:not(.deletedElement) p.step_number').each(function(index){
+      $(this).text(index +1);
+    });
+
   }
 }
 
@@ -55,6 +59,9 @@ class removeFields {
       link.parentElement.parentElement.parentElement.classList.add('deletedElement');
     }
     $('#recipe_material_count').val($('section.ingredient > .nested-fields:not(.deletedElement)').length);
+    $('.steps-wrapper > .nested-fields:not(.deletedElement) p.step_number').each(function(index){
+      $(this).text(index +1);
+    });
   }
 }
 

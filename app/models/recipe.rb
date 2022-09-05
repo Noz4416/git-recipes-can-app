@@ -1,7 +1,6 @@
 class Recipe < ApplicationRecord
 
   has_one_attached :image
-  has_one_attached :movie
   # ネストしたフォームにバリデーションをかける
   validates_associated :ingredients
   validates_associated :steps
@@ -49,10 +48,10 @@ class Recipe < ApplicationRecord
       elsif ing.unit == 'mg'
         materials_amount += (ing.amount.to_f) * 0.001
       else
-        if
-          unit = Unit.where(material_id: ing.material_id).where(unit: ing.unit).present?
+        if unit
+          unit = Unit.where(material_id: ing.material_id).where(unit: ing.unit)
           convert_amount += (unit[0].g * ing.amount.to_f)
-        next
+        else
         end
       end
     end

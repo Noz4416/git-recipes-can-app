@@ -1,5 +1,7 @@
 class BookmarksController < ApplicationController
 
+  before_action :authenticate_user!, only: [:create]
+
   def create
     recipe = Recipe.find(params[:recipe_id])
     @bookmark = current_user.recipes.new(recipe.dup.attributes)
@@ -26,6 +28,5 @@ class BookmarksController < ApplicationController
   # # ユーザーが直前にリクエストを送ったページに戻す
   #   redirect_back fallback_location: root_path
   # end
-
 
 end
