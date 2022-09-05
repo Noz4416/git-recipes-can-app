@@ -1,14 +1,14 @@
-<div class ="container my-5">
-  <div class ="row my-5">
+<div class="container my-5">
+  <div class="row my-5">
   </div>
-  <div class ="row my-5">
-    <div class ="col-sm-12 text-center">
-      <h3 class ="font-weight-bold">本当に退会しますか？</h3>
+  <div class="row my-5">
+    <div class="col-12 text-center">
+      <h3 class="font-weight-bold">本当に退会しますか？</h3>
     </div>
   </div>
 
-  <div class ="row mt-5">
-    <div class ="col-sm-12 text-center">
+  <div class="row mt-5">
+    <div class="col-12 text-center">
       <h4>
         退会されますと、これまで登録したレシピや</br>
         お気に入りなど、すべてが閲覧できなくなります。</br>
@@ -18,8 +18,8 @@
   </div>
 
 
-  <div class ="row my-5">
-    <div class ="col-sm-4 ml-4"></div>
+  <div class="row my-5">
+    <div class="col-4 ml-4"></div>
       <%= link_to "退会しない", users_mypage_path(current_user), class:"btn btn-primary btn-lg" %>
       <%= link_to "退会する", users_withdraw_path(current_user), method: :patch, "data-confirm" => "本当に退会しますか？", class:"btn btn-danger btn-lg offset-1"  %>
     </div>

@@ -4,8 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
   :recoverable, :rememberable, :validatable
 
-
-  has_many :recipes
+  has_many :recipes, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
   has_many :bookmark_recipes, through: :bookmarks, source: :recipe
 
@@ -45,5 +44,9 @@ class User < ApplicationRecord
       "公開"
     end
   end
+
+  # def active_for_authentication?
+  #   super && (is_active == true)
+  # end
 
 end
