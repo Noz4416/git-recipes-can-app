@@ -2,11 +2,10 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_q
-  # before_action :genre_search
-
+ 
 
   def after_sign_in_path_for(resource)
-    users_mypage_path
+    root_path
   end
 
   def after_sign_out_path_for(resouce)
@@ -24,6 +23,7 @@ class ApplicationController < ActionController::Base
     @q = Recipe.ransack(params[:q])
     @genres = Genre.all
   end
+
 
 
 end

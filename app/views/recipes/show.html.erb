@@ -1,26 +1,96 @@
-<h1><%= @title %></h1>
+<%= render 'shared/flash' %>
 
-<div class ="detail">
-  <!--ユーザーのみ編集ボタン-->
-  <% if user_signed_in? && @recipe.user == current_user %>
-    <%= link_to "編集する", edit_recipe_path, class:"btn recipe-edit-btn" %>
-  <% end %>
-
-  <div>
-    <!--画像か動画が添付されている時-->
-    <% if @recipe.image.attached? %>
-      <p><%= image_tag @recipe.image, size:'400x300' %></p>
-    <% end %>
-
-    <p>料理名：<%= @recipe.cuisine_name %></p>
-    <p>出来上がり量：<%= @recipe.quantity %></p>
-    <% @recipe.foodstuffs.each do |foodstuff| %>
-      <p>材料：<%= foodstuff.name %><%= foodstuff.amount %></p>
-    <% end %>
-    <% @recipe.steps.each do |step| %>
-      <p>作り方：<%= step.direction %></p>
-    <% end %>
-    <p>メモ：<%= @recipe.memo %></p>
-    <p>ジャンル：<%= @recipe.genres.name %></p>
+<div class="container my-4">
+  <div class="row mx-3 mt-3">
+    <div class="h2 font-weight-bold"><%= @title %></div>
   </div>
+  <div class="row">
+    <div class="offset-3 col-3 mb-3">
+      <% if current_user.own?(@recipe) %>
+        <%= link_to "編集する", edit_recipe_path(@recipe), class:"btn btn-lg btn-primary" %>
+      <% else %>
+        <%= link_to bookmarks_path(recipe_id: @recipe.id), method: :post, class: 'btn btn-primary' do %>
+          <i class="fas fa-clone"></i> お気に入りに登録
+   ​    <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row border-top border-bottom border-warning border-5">
+  <!--ユーザーのみ編集ボタン-->
+    <div class="col-5 my-4">
+      <!--画像が添付されている時-->
+      <div>
+        <% if @recipe.image.attached? %>
+          <%= image_tag @recipe.get_image(450,450), class: "img-fluid ml-3" %>
+        <% end %>
+      </div>
+    </div>
 
+    <table class="table table-borderless offset-1 col-6 my-4">
+      <tbody class="h5">
+        <tr>
+          <td class="col-3">料理名：</td>
+          <td class="col-7"><%= @recipe.cuisine_name %></td>
+        </tr>
+        <tr>
+          <td>出来上がり量：</td>
+          <td><%= @recipe.quantity %></td>
+        </tr>
+        <tr>
+          <td>材料：</td>
+          <% @recipe.ingredients.each do |ingredient| %>
+          <tr>
+            <th></th>
+            <td><%= ingredient.name %><%= ingredient.amount %><%= ingredient.unit %></td>
+          </tr>
+          <% end %>
+        </tr>
+        <tr>
+          <td>作り方：</td>
+          <% @recipe.steps.each do |step| %>
+          <tr>
+            <th></th>
+            <td><%= step.direction %></td>
+          </tr>
+          <% end %>
+        </tr>
+        <tr>
+          <td>ジャンル：</td>
+          <td><%= @recipe.genre.name %></td>
+        </tr>
+        <!--boolean型はtrueなど必要なし-->
+        <tr>
+          <% if @recipe.user.status %>
+            <td>レシピ作成者：</td>
+            <td><%= @recipe.user.nickname %></td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!--栄養素の計算表示-->
+  <div class="row my-4 border-bottom border-warning border-5">
+    <h5>
+      <table class="table table-borderless">
+        <tr>
+          <td><h4 class="bg-warning">栄養成分表</h4></td>
+        </tr>
+        <tr>
+          <td>カロリー：</td><td><%= @calorie %>kcal</td>
+        </tr>
+        <tr>
+          <td>たんぱく質：</td><td><%= @protein %>g</td>
+        </tr>
+        <tr>
+          <td>脂質：</td><td><%= @lipid %>g</td>
+        </tr>
+        <tr>
+          <td>炭水化物：</td><td><%= @carbohydrate %>g</td>
+        </tr>
+        <tr>
+          <td>塩分：</td><td><%= @salt %>g</td>
+        </tr>
+      </table>
+    </h5>
+  </div>
+</div>

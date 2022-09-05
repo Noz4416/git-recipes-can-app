@@ -1,0 +1,45 @@
+#button {
+  position: fixed;
+  right: 60px;
+  bottom: 60px;
+}
+
+/* input内テキスト右寄せ */
+.quantity {
+  text-align: right;
+  width: 100px;
+}
+
+/* ボーダーの太さ */
+.border-2{
+    border-width:2px !important;
+}
+
+.border-3{
+    border-width:3px !important;
+}
+
+.border-4{
+    border-width:4px !important;
+}
+
+.border-5{
+    border-width:5px !important;
+}
+
+/* アンダーライン */
+.u{
+    text-decoration: underline;
+}
+
+/* アンダーライン */
+.b{
+    font-weight: bold;
+}
+
+.field_with_errors {
+  display: contents;
+  input {
+    @extend .is-invalid;
+  }
+}

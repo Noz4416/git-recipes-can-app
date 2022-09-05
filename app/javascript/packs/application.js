@@ -17,3 +17,5 @@ import "./scripts/main";
 Rails.start();
 Turbolinks.start();
 ActiveStorage.start();
+
+

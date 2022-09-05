@@ -1,5 +1,5 @@
 class Unit < ApplicationRecord
+  belongs_to :material
 
-  belongs_to :foodstuff
-
+  enum unit: Settings.units.to_h
 end
