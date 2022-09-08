@@ -64,6 +64,7 @@ gem 'ransack'
 gem 'httpclient'
 
 # gem 'google-cloud-vision'
+gem 'config'
 
 gem 'dotenv-rails'
 group :production do
