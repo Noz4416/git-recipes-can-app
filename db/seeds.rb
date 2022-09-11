@@ -13,7 +13,7 @@ require 'csv'
 
 
 CSV.foreach('db/materials.csv', headers: true) do |row|
-  Nutrition.create(
+  Material.create(
     name: row[0],
     calorie: row[1],
     protein: row[2],
