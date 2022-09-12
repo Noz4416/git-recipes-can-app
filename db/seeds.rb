@@ -12,22 +12,60 @@
 require 'csv'
 
 
+# CSV.foreach('db/materials.csv', headers: true) do |row|
+#   Material.create(
+#     name: row[0],
+#     calorie: row[1],
+#     protein: row[2],
+#     lipid: row[3],
+#     carbohydrate: row[4],
+#     salt: row[5]
+#   )
+# end
+
+
+# Genre.create([
+#   { name: '和食'},
+#   { name: '洋食'},
+#   { name: '中華'},
+#   { name: '時短'},
+#   { name: 'その他'}
+#   ])
+
+# Material Table
 CSV.foreach('db/materials.csv', headers: true) do |row|
-  Material.create(
-    name: row[0],
-    calorie: row[1],
-    protein: row[2],
-    lipid: row[3],
-    carbohydrate: row[4],
-    salt: row[5]
-  )
+  name = row[0].gsub(/　/," ").strip # 全角スペースを取り除く
+  material_data = Material.find_by(name: name) # 登録済みの原材料か検索する
+  # 登録されていない原材料の場合データを登録する
+  if material_data.nil?
+    puts "#{name}を登録中"
+    Material.create(
+      name: name,
+      calorie: row[1],
+      protein: row[2],
+      lipid: row[3],
+      carbohydrate: row[4],
+      salt: row[5]
+    )
+  end
 end
 
+# Unit Table
+CSV.foreach('db/units.csv', headers: true) do |row|
+  material_data = Material.find_by(name: row[0])
 
-Genre.create([
-  { name: '和食'},
-  { name: '洋食'},
-  { name: '中華'},
-  { name: '時短'},
-  { name: 'その他'}
-  ])
+  Unit.find_or_create_by(material_id: material_data.id, g: row[1], unit: 3) unless row[1].blank? # 個 (CSVのセルが空でなければ登録する)
+  Unit.find_or_create_by(material_id: material_data.id, g: row[2], unit: 4) unless row[2].blank? # 大さじ (CSVのセルが空でなければ登録する)
+  Unit.find_or_create_by(material_id: material_data.id, g: row[3], unit: 5) unless row[3].blank? # 小さじ (CSVのセルが空でなければ登録する)
+  Unit.find_or_create_by(material_id: material_data.id, g: row[4], unit: 6) unless row[4].blank? # カップ (CSVのセルが空でなければ登録する)
+  Unit.find_or_create_by(material_id: material_data.id, g: row[5], unit: 9) unless row[5].blank? # 合 (CSVのセルが空でなければ登録する)
+  Unit.find_or_create_by(material_id: material_data.id, g: row[6], unit: 10) unless row[6].blank? # 升 (CSVのセルが空でなければ登録する)
+end
+
+# Genre Table
+# ジャンル一覧の配列
+genres = ['和食', '洋食', '中華', '時短', 'その他', 'お気に入り']
+# 配列を1つずつ取得し、登録されていなければ登録する
+genres.each do |genre|
+  Genre.find_or_create_by(name: genre)
+end
