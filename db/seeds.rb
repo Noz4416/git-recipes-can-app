@@ -60,6 +60,14 @@ CSV.foreach('db/units.csv', headers: true) do |row|
   Unit.find_or_create_by(material_id: material_data.id, g: row[4], unit: 6) unless row[4].blank? # カップ (CSVのセルが空でなければ登録する)
   Unit.find_or_create_by(material_id: material_data.id, g: row[5], unit: 9) unless row[5].blank? # 合 (CSVのセルが空でなければ登録する)
   Unit.find_or_create_by(material_id: material_data.id, g: row[6], unit: 10) unless row[6].blank? # 升 (CSVのセルが空でなければ登録する)
+  Unit.find_or_create_by(material_id: material_data.id, g: row[7], unit: 11) unless row[7].blank? #切れ (CSVのセルが空でなければ登録する)
+  Unit.find_or_create_by(material_id: material_data.id, g: row[8], unit: 12) unless row[8].blank? #片 (CSVのセルが空でなければ登録する)
+  Unit.find_or_create_by(material_id: material_data.id, g: row[9], unit: 13) unless row[9].blank? #丁 (CSVのセルが空でなければ登録する)
+  Unit.find_or_create_by(material_id: material_data.id, g: row[10], unit: 14) unless row[10].blank? #本 (CSVのセルが空でなければ登録する)
+  Unit.find_or_create_by(material_id: material_data.id, g: row[11], unit: 15) unless row[11].blank? #束 (CSVのセルが空でなければ登録する)
+  Unit.find_or_create_by(material_id: material_data.id, g: row[12], unit: 16) unless row[12].blank? #枚 (CSVのセルが空でなければ登録する)
+  Unit.find_or_create_by(material_id: material_data.id, g: row[13], unit: 17) unless row[13].blank? #尾 (CSVのセルが空でなければ登録する)
+  Unit.find_or_create_by(material_id: material_data.id, g: row[14], unit: 18) unless row[14].blank? #杯 (CSVのセルが空でなければ登録する)
 end
 
 # Genre Table
