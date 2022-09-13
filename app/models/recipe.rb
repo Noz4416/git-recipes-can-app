@@ -48,9 +48,9 @@ class Recipe < ApplicationRecord
       elsif ing.unit == 'mg'
         materials_amount += (ing.amount.to_f) * 0.001
       else
+        unit = Unit.find_by(material_id: ing.material_id, unit: ing.unit)
         if unit
-          unit = Unit.where(material_id: ing.material_id).where(unit: ing.unit)
-          convert_amount += (unit[0].g * ing.amount.to_f)
+          convert_amount += (unit.g * ing.amount.to_f)
         else
         end
       end
