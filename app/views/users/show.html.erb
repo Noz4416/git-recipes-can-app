@@ -4,7 +4,10 @@
   </div>
   <div class="row my-4">
     <h4 class="font-weight-bold ml-4 mr-5">登録情報</h4>
-    <%= link_to "編集する", edit_user_path(@user), class:"btn btn-success text-white ml-5" %>
+    <% if @user.email == 'guest@example.com' %>
+    <% else %>
+      <%= link_to "編集する", edit_user_path(@user), class:"btn btn-success text-white ml-5" %>
+    <% end %>
   </div>
 
   <table class="table table-bordered col-8">
