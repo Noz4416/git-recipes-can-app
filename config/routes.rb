@@ -6,12 +6,13 @@ Rails.application.routes.draw do
   # ゲストログイン用アクション
   devise_scope :user do
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
+  # sign_upでエラーが出た後、リロードでのエラー回避
+    get 'users', to: 'devise/registrations#new'
   end
-
 
   devise_for :users, controllers: {
     registrations: 'users/registrations',
-    sessions: 'users/sessions'
+    sessions: 'users/sessions',
   }
 
   get 'users/mypage' => 'users#show'
