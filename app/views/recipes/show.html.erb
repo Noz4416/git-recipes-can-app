@@ -41,15 +41,16 @@
           <% @recipe.ingredients.each do |ingredient| %>
           <tr>
             <th></th>
-            <td><%= ingredient.name %><%= ingredient.amount %><%= ingredient.unit %></td>
+            <td><%= ingredient.name %>　<%= ingredient.amount %><%= ingredient.unit %></td>
           </tr>
           <% end %>
         </tr>
         <tr>
           <td>作り方：</td>
-          <% @recipe.steps.each do |step| %>
+          <% @recipe.steps.each_with_index do |step, i| %>
+          <!--<#% @recipe.steps.each do |step| %>-->
           <tr>
-            <th></th>
+            <th class ="text-right"><%= "#{i + 1}." %></th>
             <td><%= step.direction %></td>
           </tr>
           <% end %>
