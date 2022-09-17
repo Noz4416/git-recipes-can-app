@@ -14,13 +14,14 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
   }
 
-  get 'users/mypage' => 'users#show'
+  # get 'users/mypage' => 'users#show'
   # get 'users/unsubscribe' => 'users#unsubscribe'
   # get 'recipes/search' => 'recipes#search'
   # patch 'users/withdraw' => 'users#withdraw'
 
   resources :users, only:[:edit,:update] do
     collection do
+      get :mypage, action: :show
       get :unsubscribe
       patch :withdraw
     end
