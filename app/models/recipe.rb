@@ -4,7 +4,7 @@ class Recipe < ApplicationRecord
   # ネストしたフォームにバリデーションをかける
   validates_associated :ingredients
   validates_associated :steps
-
+  
   validates :cuisine_name, presence: true
   validates :quantity, presence: true
   validates :ingredients, presence: true

@@ -10,6 +10,13 @@ ja:
         nickname: "ニックネーム"
     models:
       user: "ユーザー"
+      ingredient: "食材"
+      material: "栄養素"
+      unit: "単位"
+      bookmark: "ブックマーク"
+      genre: "ジャンル"
+      recipe: "レシピ"
+      step: "手順"
   devise:
     confirmations:
       new:

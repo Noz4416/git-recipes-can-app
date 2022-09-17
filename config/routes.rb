@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
   root to: 'recipes#index'
-  # get '/about' => 'homes#about', as: "about"
 
   # ゲストログイン用アクション
   devise_scope :user do
@@ -16,18 +15,26 @@ Rails.application.routes.draw do
   }
 
   get 'users/mypage' => 'users#show'
-  get 'users/unsubscribe' => 'users#unsubscribe'
-  get 'recipes/search' => 'recipes#search'
-  patch 'users/withdraw' => 'users#withdraw'
+  # get 'users/unsubscribe' => 'users#unsubscribe'
+  # get 'recipes/search' => 'recipes#search'
+  # patch 'users/withdraw' => 'users#withdraw'
 
-  resources :users, only:[:edit,:update]
-  resources :units, only:[:index,:create,:destroy]
-  resources :genres, only:[:index,:create,:destroy]
+  resources :users, only:[:edit,:update] do
+    collection do
+      get :unsubscribe
+      patch :withdraw
+    end
+  end
+
   resources :recipes, only:[:new,:index,:show,:edit,:create,:update,:destroy] do
     collection do
       get :bookmarks
+      get :search
     end
   end
+
+  resources :units, only:[:index,:create,:destroy]
+  resources :genres, only:[:index,:create,:destroy]
   resources :bookmarks, only:[:create,:destroy]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
