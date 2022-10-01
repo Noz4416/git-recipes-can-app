@@ -1,4 +1,4 @@
-# Recipes_Can
+# RECIPE ZUKAN
 
 
 ## サイト概要
